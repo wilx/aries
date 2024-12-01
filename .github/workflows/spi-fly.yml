@@ -13,12 +13,13 @@
 name: SPI Fly - CI Build
 
 on:
-  push:
-    # Sequence of patterns matched against refs/heads
-    branches-ignore:
-      # Push events to branches matching refs/heads/dependabot/**
-      - 'dependabot/**'
   pull_request:
+    paths:
+      - spi-fly/**
+      - .github/workflows/spi-fly.yml
+  push:
+    branches:
+      - 'trunk'
 
 defaults:
   run:
