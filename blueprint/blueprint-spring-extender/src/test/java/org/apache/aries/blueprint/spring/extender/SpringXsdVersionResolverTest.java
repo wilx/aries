@@ -30,6 +30,6 @@ public class SpringXsdVersionResolverTest {
     public void testResolve() {
         final String xsdVersion = SpringXsdVersionResolver.resolve();
 
-        Assert.assertThat(xsdVersion, equalTo("4.2"));
+        Assert.assertThat(xsdVersion, equalTo("5.3"));
     }
 }
