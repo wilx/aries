@@ -10,14 +10,14 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-name: JMX - CI Build
+name: Blueprint - CI Build
 
 on:
   pull_request:
     paths:
       - testsupport/**
-      - jmx/**
-      - .github/workflows/jmx.yml
+      - blueprint/**
+      - .github/workflows/blueprint.yml
   push:
     branches:
       - 'trunk'
@@ -44,4 +44,5 @@ jobs:
     - name: Build
       shell: bash
       run: |
-        mvn -U -e -B -ntp -am -pl jmx/jmx-itests clean install
+        mvn -U -e -B -ntp clean install -f testsupport/pom.xml
+        mvn -U -e -B -ntp clean install -f blueprint/pom.xml
