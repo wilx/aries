@@ -40,11 +40,9 @@ import javax.management.MBeanServer;
 import javax.management.MBeanServerInvocationHandler;
 import javax.management.ObjectName;
 
-import org.apache.aries.jmx.test.MbeanServerActivator;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.PaxExam;
-import org.ops4j.pax.exam.options.MavenArtifactProvisionOption;
 import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerClass;
 import org.osgi.framework.Bundle;
@@ -87,17 +85,10 @@ public abstract class AbstractIntegrationTest extends org.apache.aries.itest.Abs
 				mavenBundle("org.apache.aries.jmx", "org.apache.aries.jmx.api").versionAsInProject(),
 				mavenBundle("org.apache.aries.jmx", "org.apache.aries.jmx.whiteboard").versionAsInProject(),
 				mavenBundle("org.apache.aries.testsupport", "org.apache.aries.testsupport.unit").versionAsInProject(),
-				mbeanServerBundle()
+				mavenBundle("org.apache.aries.jmx", "org.apache.aries.jmx.mbeanserver-platform").versionAsInProject()
 				);
 	}
 
-	protected Option mbeanServerBundle() {
-		return provision(bundle()
-		        .add(MbeanServerActivator.class)
-		        .set(Constants.BUNDLE_ACTIVATOR, MbeanServerActivator.class.getName())
-		        .build(withBnd()));
-	}
-	
 	protected Option bundlea() {
 		return provision(bundle()
 		        .add(org.apache.aries.jmx.test.bundlea.Activator.class)
