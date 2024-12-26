@@ -62,7 +62,7 @@ public abstract class AbstractProxyManager implements ProxyManager
       throws UnableToProxyException 
   {
     if(dispatcher == null)
-      throw new NullPointerException("You must specify a dipatcher");
+      throw new NullPointerException("You must specify a dispatcher");
     
     if (template instanceof WovenProxy) {
       WovenProxy proxy = ((WovenProxy) template).

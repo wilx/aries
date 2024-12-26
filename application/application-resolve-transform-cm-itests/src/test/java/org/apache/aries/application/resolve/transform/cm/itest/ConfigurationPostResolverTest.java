@@ -143,6 +143,11 @@ public class ConfigurationPostResolverTest extends AbstractIntegrationTest {
     public Option[] configuration() throws Exception {
         return options(
         		baseOptions(),
+
+                // Fix access to Maven Central repository.
+                systemProperty("org.ops4j.pax.url.mvn.useFallbackRepositories").value("false"),
+                systemProperty("org.ops4j.pax.url.mvn.repositories").value("https://repo1.maven.org/maven2@id=central"),
+
                 mavenBundle("org.osgi", "org.osgi.compendium").versionAsInProject(),
 //                mavenBundle("org.apache.aries.testsupport", "org.apache.aries.testsupport.unit").versionAsInProject(),
                 mavenBundle("org.apache.aries.blueprint", "org.apache.aries.blueprint").versionAsInProject(),

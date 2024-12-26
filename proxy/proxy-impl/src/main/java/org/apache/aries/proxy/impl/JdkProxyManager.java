@@ -20,7 +20,10 @@ package org.apache.aries.proxy.impl;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.apache.aries.proxy.InvocationListener;
@@ -38,12 +41,16 @@ public final class JdkProxyManager extends AbstractProxyManager implements Proxy
 
   private static final Class<?>[] getInterfaces(Collection<Class<?>> classes) throws UnableToProxyException
   {
+    final List<Class<?>> list = new ArrayList<>(1);
     for (Class<?> clazz : classes) {
-        if (!!!clazz.isInterface()) {
-          throw new UnableToProxyException(clazz, String.format("The class %s is not an interface and therefore a proxy cannot be generated.", clazz.getName()));
-        } 
+      if (clazz.isInterface()) {
+        list.add(clazz);
+        continue;
+      }
+      final Class<?>[] interfaces = clazz.getInterfaces();
+      list.addAll(Arrays.asList(interfaces));
     }
-    return (Class[]) classes.toArray(new Class[classes.size()]);
+    return (Class[]) list.toArray(new Class[classes.size()]);
   }
 
   @Override

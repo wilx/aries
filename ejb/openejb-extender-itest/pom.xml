@@ -99,6 +99,8 @@
         <pax-url.version>2.6.16</pax-url.version>
         <scannotation.version>1.0.2_1</scannotation.version>
         <xbeansVersion>3.8</xbeansVersion>
+	  <exam.version>4.13.5</exam.version>
+	  <surefire.version>3.5.2</surefire.version>
     </properties>
 
     <dependencies>
@@ -584,6 +586,13 @@
                     </execution>
                 </executions>
             </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<forkNode implementation="org.apache.maven.plugin.surefire.extensions.SurefireForkNodeFactory"/>
+				</configuration>
+			</plugin>
         </plugins>
     </build>
 

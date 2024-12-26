@@ -48,6 +48,7 @@ import org.apache.aries.application.management.spi.repository.RepositoryGenerato
 import org.apache.aries.application.management.spi.resolve.AriesApplicationResolver;
 import org.apache.aries.application.modelling.ModelledResource;
 import org.apache.aries.application.modelling.ModelledResourceManager;
+import org.apache.aries.application.runtime.itests.util.IsolationTestUtils;
 import org.apache.aries.application.utils.AppConstants;
 import org.apache.aries.application.utils.manifest.ContentFactory;
 import org.apache.aries.itest.AbstractIntegrationTest;
@@ -330,7 +331,7 @@ public class OBRResolverTest extends AbstractIntegrationTest {
 
                 // Bundles
                 mavenBundle("org.apache.aries.blueprint", "org.apache.aries.blueprint").versionAsInProject(),
-                mavenBundle("org.ow2.asm", "asm-all").versionAsInProject(),
+                IsolationTestUtils.asm(),
                 mavenBundle("org.apache.aries.proxy", "org.apache.aries.proxy").versionAsInProject(),
                 mavenBundle("org.apache.aries", "org.apache.aries.util").versionAsInProject(),
                 mavenBundle("org.apache.aries.application", "org.apache.aries.application.api").versionAsInProject(),

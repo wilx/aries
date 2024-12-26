@@ -22,15 +22,15 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.PrototypeServiceFactory;
 import org.osgi.framework.ServiceRegistration;
 
-public class ProviderPrototypeServiceFactory implements PrototypeServiceFactory {
-    private final Class<?> providerClass;
+public class ProviderPrototypeServiceFactory<T> implements PrototypeServiceFactory<T> {
+    private final Class<T> providerClass;
 
-    public ProviderPrototypeServiceFactory(Class<?> cls) {
+    public ProviderPrototypeServiceFactory(Class<T> cls) {
         providerClass = cls;
     }
 
     @Override
-    public Object getService(Bundle bundle, ServiceRegistration registration) {
+    public T getService(Bundle bundle, ServiceRegistration registration) {
         try {
             return providerClass.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
@@ -40,7 +40,7 @@ public class ProviderPrototypeServiceFactory implements PrototypeServiceFactory 
     }
 
     @Override
-    public void ungetService(Bundle bundle, ServiceRegistration registration, Object service) {
+    public void ungetService(Bundle bundle, ServiceRegistration<T> registration, T service) {
         // nothing to do
     }
 }

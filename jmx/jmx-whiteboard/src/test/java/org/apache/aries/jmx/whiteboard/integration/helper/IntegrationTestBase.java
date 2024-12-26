@@ -88,8 +88,8 @@ public class IntegrationTestBase {
                 bundle(bundleFile.toURI().toString()),
                 mavenBundle("org.ops4j.pax.tinybundles", "tinybundles", "2.0.0"),
                 mavenBundle("org.apache.felix", "org.apache.felix.configadmin", "1.2.8"),
-                mavenBundle("org.ops4j.pax.logging", "pax-logging-api", "1.7.2"),
-                mavenBundle("org.ops4j.pax.logging", "pax-logging-service", "1.7.2"));
+                mavenBundle("org.ops4j.pax.logging", "pax-logging-api").versionAsInProject(),
+                mavenBundle("org.ops4j.pax.logging", "pax-logging-service").versionAsInProject());
 
         return options;
     }

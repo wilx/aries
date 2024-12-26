@@ -44,6 +44,8 @@
     </scm>
 
     <properties>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <java.source.version>1.7</java.source.version>
         <!-- Export package versions are maintained in packageinfo files -->
         <aries.osgi.export.pkg>
             org.apache.aries.unittest.fixture,
@@ -96,7 +98,7 @@
             <version>${javax.inject.version}</version>
         </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>

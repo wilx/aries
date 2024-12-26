@@ -24,7 +24,7 @@
     <parent>
         <groupId>org.apache.aries</groupId>
         <artifactId>parent</artifactId>
-        <version>2.0.0</version>
+        <version>2.1.2-SNAPSHOT</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
@@ -127,12 +127,12 @@
         <!-- External Dependencies -->
         <cmVersion>3.2.0-v20070116</cmVersion>
         <servicesVersion>3.1.200-v20070605</servicesVersion>
-        <asmVersion>3.2</asmVersion>
+        <asmVersion>5.2</asmVersion>
         <paxLoggingApiVersion>1.5.0</paxLoggingApiVersion>
         <paxLoggingServiceVersion>1.5.0</paxLoggingServiceVersion>
         <derbyVersion>10.14.2.0</derbyVersion>
         <commonsCollectionsVersion>3.2.2</commonsCollectionsVersion>
-        <commonsLangVersion>2.5</commonsLangVersion>
+        <commonsLangVersion>2.6</commonsLangVersion>
         <commonsPoolVersion>1.5.4</commonsPoolVersion>
         <servicemixBundlesSerpVersion>1.13.1_2</servicemixBundlesSerpVersion>
         <servicemixBundlesCglibVersion>2.1_3_4</servicemixBundlesCglibVersion>
@@ -169,7 +169,7 @@
         <dependencies>
             <!-- External project dependencies -->
             <dependency>
-                <groupId>asm</groupId>
+                <groupId>org.ow2.asm</groupId>
                 <artifactId>asm-all</artifactId>
                 <version>${asmVersion}</version>
             </dependency>

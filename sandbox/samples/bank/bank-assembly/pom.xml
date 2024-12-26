@@ -177,9 +177,9 @@
          </dependency>
 
         <dependency>
-             <groupId>asm</groupId>
+             <groupId>org.ow2.asm</groupId>
              <artifactId>asm-all</artifactId>
-             <version>3.2</version>
+             <version>5.2</version>
         </dependency>
 
         <dependency>
@@ -211,7 +211,7 @@
 		               <goal>run</goal>
 		           </goals>
 		           <configuration>
-		            <tasks>
+		            <target>
 		            <!-- Uncomment this to download the Tuscany distro. Altenatively - make a copy in the reources dir of the project -->
 		                <get src="${tuscany-site}${tuscany-version}/apache-tuscany-sca-all-${tuscany-version}.zip" dest="${project.build.directory}/tuscany-${tuscany-version}.zip" /> 
 		                <unzip src="${project.build.directory}/tuscany-${tuscany-version}.zip" dest="${project.build.directory}/" overwrite="true"/>
@@ -220,7 +220,7 @@
 						<copy file="src/main/resources/apache-tuscany-sca-all-2.0-Beta1.zip" todir="${project.build.directory}/" />
 		                <unzip src="${project.build.directory}/tuscany-2.0-Beta1.zip" dest="${project.build.directory}/" overwrite="true"/>
 					-->
-		            </tasks>
+		            </target>
 		            </configuration>
 		         </execution>
 		      </executions>

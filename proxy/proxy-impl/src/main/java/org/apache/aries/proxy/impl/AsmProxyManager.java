@@ -46,7 +46,8 @@ public final class AsmProxyManager extends AbstractProxyManager implements Proxy
 {
   static final ClassLoader bootClassLoader = new ClassLoader(Object.class.getClassLoader()) { /* boot class loader */};
 	
-  public Object createNewProxy(Bundle clientBundle, Collection<Class<?>> classes, 
+  @Override
+  public Object createNewProxy(Bundle clientBundle, Collection<Class<?>> classes,
       Callable<Object> dispatcher, InvocationListener listener) throws UnableToProxyException
   {
     Object proxyObject = null;
@@ -200,7 +201,8 @@ public final class AsmProxyManager extends AbstractProxyManager implements Proxy
         }
         private boolean next() {
           while (index < tmp.size()) {
-            if (tmp.get(index) != null && tmp.get(index).hasMoreElements()) {
+            final Enumeration<URL> urlEnumeration = tmp.get(index);
+            if (urlEnumeration != null && urlEnumeration.hasMoreElements()) {
               return true;
             }
             index++;

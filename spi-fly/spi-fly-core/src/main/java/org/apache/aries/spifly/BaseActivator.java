@@ -39,6 +39,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import aQute.bnd.header.Attrs;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -119,21 +120,25 @@ public abstract class BaseActivator implements BundleActivator {
         Set<String> addedHeaders = new HashSet<String>();
         List<String> added = allHeaders.put(consumerHeaderName, getAllHeaders(consumerHeaderName, bundle));
         if (added != null) {
-            added.stream().forEach(addedHeaders::add);
+            addedHeaders.addAll(added);
         }
         added = allHeaders.put(SpiFlyConstants.REQUIRE_CAPABILITY, getAllHeaders(SpiFlyConstants.REQUIRE_CAPABILITY, bundle));
         if (added != null) {
-            added.stream().forEach(addedHeaders::add);
+            addedHeaders.addAll(added);
         }
         if (addedHeaders.isEmpty()) {
-            getAutoConsumerInstructions().map(Parameters::stream).orElseGet(MapStream::empty).filterKey(
-                i -> Glob.toPattern(i).asPredicate().test(bundle.getSymbolicName())
-            ).findFirst().ifPresent(
-                un -> allHeaders.put(
-                    SpiFlyConstants.REQUIRE_CAPABILITY,
-                    Arrays.asList(
-                        SpiFlyConstants.CLIENT_REQUIREMENT.concat(",osgi.serviceloader;filter:='(osgi.serviceloader=*)'")))
-            );
+            try (final MapStream<String, Attrs> stream = getAutoConsumerInstructions()
+                .map(Parameters::stream)
+                .orElseGet(MapStream::empty)) {
+                stream.filterKey(
+                    i -> Glob.toPattern(i).asPredicate().test(bundle.getSymbolicName())
+                ).findFirst().ifPresent(
+                    un -> allHeaders.put(
+                        SpiFlyConstants.REQUIRE_CAPABILITY,
+                        Arrays.asList(
+                            SpiFlyConstants.CLIENT_REQUIREMENT.concat(",osgi.serviceloader;filter:='(osgi.serviceloader=*)'")))
+                );
+            }
         }
 
         Set<WeavingData> wd = new HashSet<WeavingData>();
@@ -276,12 +281,7 @@ public abstract class BaseActivator implements BundleActivator {
 
     public void unregisterProviderBundle(Bundle bundle) {
         for (Map<Long, Pair<Bundle, Map<String, Object>>> value : registeredProviders.values()) {
-            for(Iterator<Entry<Long, Pair<Bundle, Map<String, Object>>>> it = value.entrySet().iterator(); it.hasNext(); ) {
-                Entry<Long, Pair<Bundle, Map<String, Object>>> entry = it.next();
-                if (entry.getValue().getLeft().equals(bundle)) {
-                    it.remove();
-                }
-            }
+            value.entrySet().removeIf(entry -> entry.getValue().getLeft().equals(bundle));
         }
     }
 

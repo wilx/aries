@@ -148,8 +148,8 @@ public class ProviderBundleTrackerCustomizer implements BundleTrackerCustomizer 
                     Object instance =
                         (details.properties.containsKey("service.scope") &&
                         "prototype".equalsIgnoreCase(String.valueOf(details.properties.get("service.scope")))) ?
-                            new ProviderPrototypeServiceFactory(cls) :
-                            new ProviderServiceFactory(cls);
+                            new ProviderPrototypeServiceFactory<>(cls) :
+                            new ProviderServiceFactory<>(cls);
 
                     SecurityManager sm = System.getSecurityManager();
                     if (sm != null) {
@@ -195,11 +195,12 @@ public class ProviderBundleTrackerCustomizer implements BundleTrackerCustomizer 
                     try {
                         className = className.trim();
 
-                        if (className.length() == 0)
-                            continue; // empty line
-
-                        if (className.startsWith("#"))
-                            continue; // a comment
+                        if (// empty line
+                            className.isEmpty()
+                            // a comment
+                            || className.startsWith("#")) {
+                            continue;
+                        }
 
                         String serviceFile = serviceFileURL.toExternalForm();
                         int idx = serviceFile.lastIndexOf('/');
@@ -257,7 +258,7 @@ public class ProviderBundleTrackerCustomizer implements BundleTrackerCustomizer 
                 List<ServiceDetails> collectServiceDetails = collectServiceDetails(bundle, serviceFileURLs, DiscoveryMode.AUTO_PROVIDERS_PROPERTY);
 
                 collectServiceDetails.stream().map(ServiceDetails::getProperties).filter(Objects::nonNull).forEach(
-                    hashtable -> hashtable.forEach(customAttributes::put)
+                    customAttributes::putAll
                 );
 
                 List<String> providedServices = collectServiceDetails.stream().map(ServiceDetails::getServiceType).collect(toList());
@@ -365,7 +366,7 @@ public class ProviderBundleTrackerCustomizer implements BundleTrackerCustomizer 
                     serviceNames.add(entry.getValue().trim());
                     continue;
                 }
-                if (SpiFlyConstants.REGISTER_DIRECTIVE.equals(entry.getKey()) && entry.getValue().equals("")) {
+                if (SpiFlyConstants.REGISTER_DIRECTIVE.equals(entry.getKey()) && entry.getValue().isEmpty()) {
                     continue;
                 }
 
@@ -480,7 +481,7 @@ public class ProviderBundleTrackerCustomizer implements BundleTrackerCustomizer 
         SERVICELOADER_CAPABILITIES
     }
 
-    class ServiceDetails {
+    static class ServiceDetails {
         public ServiceDetails(String serviceType, String instanceType, Hashtable<String, Object> properties) {
             this.serviceType = serviceType;
             this.instanceType = instanceType;

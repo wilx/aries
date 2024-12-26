@@ -130,6 +130,9 @@ public abstract class SubsystemTest extends AbstractIntegrationTest {
 	    init();
 		return new Option[] {
 				baseOptions(),
+				// Fix access to Maven Central repository.
+				systemProperty("org.ops4j.pax.url.mvn.useFallbackRepositories").value("false"),
+				systemProperty("org.ops4j.pax.url.mvn.repositories").value("https://repo1.maven.org/maven2@id=central"),
 				systemProperty("org.osgi.framework.bsnversion").value("multiple"),
 				systemProperty("org.osgi.framework.storage.clean").value("onFirstInit"),
 				// Bundles

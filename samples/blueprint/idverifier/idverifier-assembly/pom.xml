@@ -78,16 +78,16 @@
             <artifactId>org.apache.aries.blueprint</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.aries</groupId>
-            <artifactId>org.apache.aries.util</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.aries.jmx</groupId>
-            <artifactId>org.apache.aries.jmx.blueprint</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>asm</groupId>
+		<dependency>
+			<groupId>org.apache.aries</groupId>
+			<artifactId>org.apache.aries.util</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.aries.jmx</groupId>
+			<artifactId>org.apache.aries.jmx.blueprint</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.ow2.asm</groupId>
             <artifactId>asm-all</artifactId>
         </dependency>
 

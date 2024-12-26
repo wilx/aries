@@ -18,6 +18,9 @@
  */
 package org.apache.aries.application.runtime.itests.util;
 
+import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
+import static org.ops4j.pax.exam.CoreOptions.systemProperty;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.InvocationHandler;
@@ -41,6 +44,8 @@ import org.apache.aries.application.modelling.ModelledResource;
 import org.apache.aries.application.modelling.ModellingManager;
 import org.apache.aries.isolated.sample.HelloWorld;
 import org.apache.felix.bundlerepository.RepositoryAdmin;
+import org.ops4j.pax.exam.Option;
+import org.ops4j.pax.exam.options.CompositeOption;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
@@ -199,5 +204,32 @@ public class IsolationTestUtils {
     } else {
       throw new IllegalStateException("Expected to find isolated app ctx, but didn't");
     }
+  }
+
+  public static CompositeOption asm() {
+      return () -> new Option[] {
+          mavenBundle("org.ow2.asm", "asm-commons").versionAsInProject(),
+          mavenBundle("org.ow2.asm", "asm-tree").versionAsInProject(),
+          mavenBundle("org.ow2.asm", "asm-analysis").versionAsInProject(),
+          mavenBundle("org.ow2.asm", "asm").versionAsInProject(),
+      };
+  }
+
+  public static CompositeOption logging() {
+      return () -> new Option[] {
+          // framework / core bundles
+          mavenBundle("org.ops4j.pax.logging", "pax-logging-api").versionAsInProject(),
+          mavenBundle("org.ops4j.pax.logging", "pax-logging-logback").versionAsInProject(),
+          systemProperty("osgi.debug").value(""),
+          systemProperty("eclipse.consoleLog").value("true")
+      };
+  }
+
+  public static CompositeOption fixMaven() {
+      return () -> new Option[] {
+          // Fix access to Maven Central repository.
+          systemProperty("org.ops4j.pax.url.mvn.useFallbackRepositories").value("false"),
+          systemProperty("org.ops4j.pax.url.mvn.repositories").value("https://repo1.maven.org/maven2@id=central"),
+      };
   }
 }

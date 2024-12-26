@@ -77,10 +77,17 @@ public abstract class AbstractIntegrationTest extends org.apache.aries.itest.Abs
                 systemProperty("org.apache.aries.proxy.weaving.enabled").value("none"),
                 systemProperty("pax.exam.osgi.unresolved.fail").value("true"),
 
+                // Fix access to Maven Central repository.
+                systemProperty("org.ops4j.pax.url.mvn.useFallbackRepositories").value("false"),
+                systemProperty("org.ops4j.pax.url.mvn.repositories").value("https://repo1.maven.org/maven2@id=central"),
+
                 // Bundles
                 mavenBundle("org.apache.felix", "org.apache.felix.configadmin").versionAsInProject(),
                 mavenBundle("org.apache.felix", "org.apache.felix.coordinator").versionAsInProject(),
-                
+
+                mavenBundle("org.ow2.asm", "asm-commons").versionAsInProject(),
+                mavenBundle("org.ow2.asm", "asm").versionAsInProject(),
+
                 mavenBundle("org.apache.geronimo.specs", "geronimo-j2ee-connector_1.6_spec").versionAsInProject(),
                 mavenBundle("org.apache.geronimo.specs", "geronimo-validation_1.0_spec").versionAsInProject(),
                 mavenBundle("org.apache.geronimo.components", "geronimo-connector").versionAsInProject(),
