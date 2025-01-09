@@ -29,7 +29,7 @@
     </parent>  
 
     <artifactId>org.apache.aries.jmx.mbeanserver-platform</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <packaging>bundle</packaging>
     <name>Apache Aries JMX MBeanServer (Platform)</name>
     <description>
@@ -39,7 +39,7 @@
     <scm>
         <connection>scm:git:git@github.com:apache/aries.git</connection>
         <developerConnection>scm:git:git@github.com:apache/aries.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>org.apache.aries.jmx.mbeanserver-platform-0.0.1</tag>
     </scm>
 
     <properties>
@@ -47,7 +47,7 @@
         <aries.osgi.activator>
             org.apache.aries.jmx.mbean_server.platform.impl.Activator
         </aries.osgi.activator>
-        <aries.osgi.export.pkg/>
+        <aries.osgi.export.pkg />
         <aries.osgi.private.pkg>
             org.apache.aries.jmx.mbean_server.platform.impl
         </aries.osgi.private.pkg>
