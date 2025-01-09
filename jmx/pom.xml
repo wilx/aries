@@ -51,6 +51,7 @@
         <module>jmx-bundle</module>
         <module>jmx-blueprint-bundle</module>
         <module>jmx-itests</module>
+        <module>jmx-mbeanserver-platform</module>
     </modules>
 
 </project>
