@@ -63,7 +63,7 @@
         <aries.osgi.private.pkg>
             org.apache.aries.proxy.impl*
         </aries.osgi.private.pkg>
-        <lastReleaseVersion>1.0.1</lastReleaseVersion>
+        <lastReleaseVersion>1.1.14</lastReleaseVersion>
     </properties>
 
     <dependencies>
