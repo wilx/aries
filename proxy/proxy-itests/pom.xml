@@ -45,7 +45,7 @@
     <properties>
         <exam.version>4.13.3</exam.version>
         <url.version>2.5.3</url.version>
-        <logback.version>0.9.29</logback.version>
+        <logback.version>1.5.16</logback.version>
         <asm.version>9.6</asm.version>
     </properties>
 
