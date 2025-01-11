@@ -299,8 +299,11 @@ public abstract class AbstractProxyTest {
               when(localRepo != null).useOptions(CoreOptions.vmOption("-Dorg.ops4j.pax.url.mvn.localRepository=" + localRepo)),
               mavenBundle("org.ow2.asm", "asm-commons").versionAsInProject(),
               mavenBundle("org.ow2.asm", "asm").versionAsInProject(),
+              mavenBundle("org.ow2.asm", "asm-tree").versionAsInProject(),
+              mavenBundle("org.ow2.asm", "asm-analysis").versionAsInProject(),
               mavenBundle("org.ops4j.pax.logging", "pax-logging-api").versionAsInProject(),
               mavenBundle("org.ops4j.pax.logging", "pax-logging-service").versionAsInProject(),
+              mavenBundle("org.apache.aries.proxy", "org.apache.aries.proxy.api").versionAsInProject(),
               mavenBundle("org.apache.aries.proxy", "org.apache.aries.proxy").versionAsInProject()
               /* vmOption ("-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"),
               waitForFrameworkStartup(),*/
