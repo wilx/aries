@@ -38,17 +38,9 @@
 		<url>https://gitbox.apache.org/repos/asf?p=aries.git;a=summary</url>
 	</scm>
 
-	<profiles>
-		<profile>
-			<id>jdk18</id>
-			<activation>
-				<jdk>1.8</jdk>
-			</activation>
-			<modules>
-				<module>pushstream</module>
-			</modules>
-		</profile>
-	</profiles>
+    <modules>
+       <module>pushstream</module>
+    </modules>
 
 	<dependencyManagement>
 		<dependencies>
