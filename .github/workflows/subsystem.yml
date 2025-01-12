@@ -15,6 +15,7 @@ name: Subsystem - CI Build
 on:
   pull_request:
     paths:
+      - parent/**
       - testsupport/**
       - subsystem/**
       - .github/workflows/subsystem.yml

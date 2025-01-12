@@ -15,6 +15,7 @@ name: JNDI - CI Build
 on:
   pull_request:
     paths:
+      - parent/**
       - testsupport/**
       - jndi/**
       - .github/workflows/jndi.yml

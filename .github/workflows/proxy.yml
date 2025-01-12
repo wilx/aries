@@ -15,6 +15,7 @@ name: Proxy - CI Build
 on:
   pull_request:
     paths:
+      - parent/**
       - proxy/**
       - .github/workflows/proxy.yml
   push:
