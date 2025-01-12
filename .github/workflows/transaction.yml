@@ -15,6 +15,7 @@ name: Transaction - CI Build
 on:
   pull_request:
     paths:
+      - parent/**
       - transaction/**
       - .github/workflows/transaction.yml
   push:

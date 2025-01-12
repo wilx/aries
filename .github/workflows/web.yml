@@ -15,6 +15,7 @@ name: Web - CI Build
 on:
   pull_request:
     paths:
+      - parent/**
       - testsupport/**
       - web/**
       - .github/workflows/web.yml

@@ -15,6 +15,7 @@ name: Quiesce - CI Build
 on:
   pull_request:
     paths:
+      - parent/**
       - testsupport/**
       - quiesce/**
       - .github/workflows/quiesce.yml

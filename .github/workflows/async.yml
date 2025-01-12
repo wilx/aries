@@ -15,6 +15,7 @@ name: Async - CI Build
 on:
   pull_request:
     paths:
+      - parent/**
       - async/**
       - .github/workflows/async.yml
   push:

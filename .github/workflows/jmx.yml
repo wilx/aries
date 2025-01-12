@@ -15,6 +15,7 @@ name: JMX - CI Build
 on:
   pull_request:
     paths:
+      - parent/**
       - testsupport/**
       - jmx/**
       - .github/workflows/jmx.yml
