@@ -15,6 +15,7 @@ name: SPI Fly - CI Build
 on:
   pull_request:
     paths:
+      - parent/**
       - spi-fly/**
       - .github/workflows/spi-fly.yml
   push:

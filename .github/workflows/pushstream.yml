@@ -10,15 +10,14 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-name: Subsystem - CI Build
+name: pushstream - CI Build
 
 on:
   pull_request:
     paths:
       - parent/**
-      - testsupport/**
-      - subsystem/**
-      - .github/workflows/subsystem.yml
+      - pushstream/**
+      - .github/workflows/pushstream.yml
   push:
     branches:
       - 'trunk'
@@ -31,7 +30,7 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        java: [ 8 ]
+        java: [ 8, 11, 17, 21 ]
         os: [ ubuntu-latest ]
     name: JDK${{ matrix.java }} ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
@@ -46,5 +45,4 @@ jobs:
     - name: Build
       shell: bash
       run: |
-        mvn -U -e -B -ntp clean install -f testsupport/pom.xml
-        mvn -U -e -B -ntp clean install -f subsystem/pom.xml
+        mvn -U -e -B -ntp clean install -f pushstream/pom.xml

@@ -10,15 +10,14 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-name: Subsystem - CI Build
+name: Testsupport - CI Build
 
 on:
   pull_request:
     paths:
       - parent/**
       - testsupport/**
-      - subsystem/**
-      - .github/workflows/subsystem.yml
+      - .github/workflows/testsupport.yml
   push:
     branches:
       - 'trunk'
@@ -47,4 +46,3 @@ jobs:
       shell: bash
       run: |
         mvn -U -e -B -ntp clean install -f testsupport/pom.xml
-        mvn -U -e -B -ntp clean install -f subsystem/pom.xml

@@ -10,15 +10,14 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-name: Subsystem - CI Build
+name: esa-ant-task - CI Build
 
 on:
   pull_request:
     paths:
       - parent/**
-      - testsupport/**
-      - subsystem/**
-      - .github/workflows/subsystem.yml
+      - esa-ant-task/**
+      - .github/workflows/esa-ant-task.yml
   push:
     branches:
       - 'trunk'
@@ -46,5 +45,4 @@ jobs:
     - name: Build
       shell: bash
       run: |
-        mvn -U -e -B -ntp clean install -f testsupport/pom.xml
-        mvn -U -e -B -ntp clean install -f subsystem/pom.xml
+        mvn -U -e -B -ntp clean install -f esa-ant-task/pom.xml
