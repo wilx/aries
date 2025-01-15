@@ -24,6 +24,9 @@ updates:
       - dependency-name: "org.apache.derby:derby"
         versions:
           - ">=10.15.0" # does not support java 8
+      - dependency-name: " org.springframework:spring-*"
+        versions:
+          - ">=6.0.0" # does not support java 8
 
   - package-ecosystem: "maven"
     directory: "/application"
