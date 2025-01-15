@@ -63,7 +63,7 @@
         <org.apache.felix.coordinator.version>1.0.0</org.apache.felix.coordinator.version>
         <org.apache.servicemix.bundles.javax-inject.version>1_2</org.apache.servicemix.bundles.javax-inject.version>
         <org.eclipse.osgi.version>3.8.0.v20120529-1548</org.eclipse.osgi.version>
-        <org.osgi.core.version>4.3.1</org.osgi.core.version>
+        <org.osgi.core.version>6.0.0</org.osgi.core.version>
         <slf4j-api.version>1.7.7</slf4j-api.version>
         <tinybundles.version>2.0.0</tinybundles.version>
         <url.version>2.6.7</url.version>
