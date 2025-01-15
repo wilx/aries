@@ -11,7 +11,7 @@ updates:
 
   # Maintain dependencies for maven
   - package-ecosystem: "maven"
-    directory: "/spi-fly"
+    directory: "/"
     schedule:
       interval: "daily"
     ignore:
