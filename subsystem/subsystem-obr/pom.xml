@@ -55,7 +55,7 @@
 
         <org.apache.aries.application.utils.version>1.0.0</org.apache.aries.application.utils.version>
         <org.apache.felix.bundlerepository.version>1.6.4</org.apache.felix.bundlerepository.version>
-        <org.osgi.core.version>5.0.0</org.osgi.core.version>
+        <org.osgi.core.version>6.0.0</org.osgi.core.version>
         <org.osgi.enterprise.version>5.0.0</org.osgi.enterprise.version>
     </properties>
 
