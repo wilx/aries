@@ -41,6 +41,24 @@ updates:
     ignore:
       - dependency-name: "*"
   - package-ecosystem: "maven"
+    directory: "/subsystem/subsystem-scope-api"
+    schedule:
+      interval: "monthly"
+    ignore:
+      - dependency-name: "*"
+  - package-ecosystem: "maven"
+    directory: "/subsystem/subsystem-scope-impl"
+    schedule:
+      interval: "monthly"
+    ignore:
+      - dependency-name: "*"
+  - package-ecosystem: "maven"
+    directory: "/subsystem/subsystem-scope-itests"
+    schedule:
+      interval: "monthly"
+    ignore:
+      - dependency-name: "*"
+  - package-ecosystem: "maven"
     directory: "/tutorials"
     schedule:
       interval: "monthly"
