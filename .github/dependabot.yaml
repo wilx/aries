@@ -14,3 +14,10 @@ updates:
     directory: "/spi-fly"
     schedule:
       interval: "daily"
+    ignore:
+      - dependency-name: "org.apache.felix:maven-bundle-plugin"
+        versions:
+          - ">=6.0.0"
+      - dependency-name: "biz.aQute.bnd:biz.aQute.bndlib"
+        versions:
+          - ">=7.0.0"
