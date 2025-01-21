@@ -59,8 +59,13 @@ public class OsgiCapabilityAdapter implements Capability {
 		result.put(getName(), result.get(capability.getNamespace()));
 		return result;
 	}
-	
-	@Override
+
+    @Override
+    public Map<String, String> getDirectives() {
+        return capability.getDirectives();
+    }
+
+    @Override
 	public int hashCode() {
 		return capability.hashCode();
 	}
