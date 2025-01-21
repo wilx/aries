@@ -155,7 +155,7 @@
         <felixShellVersion>1.4.2</felixShellVersion>
         <felixShellTuiVersion>1.4.1</felixShellTuiVersion>
         <felixEventadminVersion>1.2.2</felixEventadminVersion>
-        <felixBundlerepositoryVersion>1.6.4</felixBundlerepositoryVersion>
+        <felixBundlerepositoryVersion>2.0.10</felixBundlerepositoryVersion>
         <felixConfigadminVersion>1.2.4</felixConfigadminVersion>
         <serpVersion>1.13.1</serpVersion>
         <javaxServletVersion>1.2</javaxServletVersion>
