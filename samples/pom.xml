@@ -133,7 +133,7 @@
         <derbyVersion>10.14.2.0</derbyVersion>
         <commonsCollectionsVersion>3.2.2</commonsCollectionsVersion>
         <commonsLangVersion>2.5</commonsLangVersion>
-        <commonsPoolVersion>1.5.4</commonsPoolVersion>
+        <commonsPoolVersion>1.6</commonsPoolVersion>
         <servicemixBundlesSerpVersion>1.13.1_2</servicemixBundlesSerpVersion>
         <servicemixBundlesCglibVersion>2.1_3_4</servicemixBundlesCglibVersion>
 
