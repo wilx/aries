@@ -551,8 +551,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <forkMode>pertest</forkMode>
-
                     <!-- Tests are not reliable -->
                     <skipTests>true</skipTests>
                 </configuration>
@@ -574,7 +572,6 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
-                            <forkMode>pertest</forkMode>
                             <!--
                                 when the local repo location has been specified, we need to pass
                                 on this information to PAX mvn url
