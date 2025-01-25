@@ -45,6 +45,7 @@
     <properties>
         <asm-debug-all.version>5.0.3</asm-debug-all.version>
         <cm.version>3.2.0-v20070116</cm.version>
+        <depends-maven-plugin.version>1.5.0</depends-maven-plugin.version>
         <geronimo-servlet_2.5_spec.version>1.2</geronimo-servlet_2.5_spec.version>
         <jndi-api.version>${jndi-api.dev-version}</jndi-api.version>
         <jndi-bundle.version>${jndi-bundle.dev-version}</jndi-bundle.version>
@@ -279,14 +280,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <forkMode>pertest</forkMode>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.servicemix.tooling</groupId>
                 <artifactId>depends-maven-plugin</artifactId>
-                <version>1.5.0</version>
+                <version>${depends-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>generate-resources</phase>
