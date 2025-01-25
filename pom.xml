@@ -37,7 +37,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>application</module>
         <module>async</module>
         <module>blueprint</module>
         <module>eba-maven-plugin</module>
@@ -50,7 +49,6 @@
         <module>proxy</module>
         <module>pushstream</module>
         <module>quiesce</module>
-        <module>samples</module>
         <module>spi-fly</module>
         <module>subsystem</module>
         <module>testsupport</module>
@@ -58,6 +56,14 @@
         <module>util</module>
         <module>versioning</module>
         <module>web</module>
+
+        <!-- excluded as not having CI build-->
+        <!--
+        <module>application</module>
+        <module>samples</module>
+        <module>sandbox</module>
+        <module>tutorials</module>
+        -->
     </modules>
 
     <build>
