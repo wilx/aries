@@ -44,7 +44,7 @@
         <easymock.version>3.0</easymock.version>
         <exam.version>4.13.5</exam.version>
         <logback.version>1.5.16</logback.version>
-        <maven-jar-plugin.version>2.3</maven-jar-plugin.version>
+        <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
         <org.apache.aries.application.api.version>1.0.0</org.apache.aries.application.api.version>
         <org.apache.aries.application.modeller.version>1.0.0</org.apache.aries.application.modeller.version>
