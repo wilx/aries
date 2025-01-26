@@ -24,8 +24,8 @@
     <parent>
         <groupId>org.apache.aries</groupId>
         <artifactId>parent</artifactId>
-        <version>2.1.1</version>
-        <relativePath/>
+        <version>2.1.2-SNAPSHOT</version>
+        <relativePath>../../parent/pom.xml</relativePath>
     </parent>
 
     <groupId>org.apache.aries.versioning</groupId>
