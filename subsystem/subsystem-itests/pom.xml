@@ -44,6 +44,7 @@
         <easymock.version>3.0</easymock.version>
         <exam.version>4.13.5</exam.version>
         <logback.version>1.5.16</logback.version>
+        <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
         <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
         <org.apache.aries.application.api.version>1.0.0</org.apache.aries.application.api.version>
@@ -371,7 +372,7 @@
                             </excludes>
                             <classesDirectory>${project.build.directory}/test-classes</classesDirectory>
                             <outputDirectory>${project.build.directory}/test-classes/nobsn</outputDirectory>
-                            <finalName>tb1</finalName>
+                            <classifier>tb1-nobsn</classifier>
                         </configuration>
                         <phase>process-test-classes</phase>
                     </execution>
@@ -389,7 +390,7 @@
                             </excludes>
                             <classesDirectory>${project.build.directory}/test-classes</classesDirectory>
                             <outputDirectory>${project.build.directory}/test-classes/application1</outputDirectory>
-                            <finalName>tb1</finalName>
+                            <classifier>tb1-application1</classifier>
                         </configuration>
                         <phase>process-test-classes</phase>
                     </execution>
@@ -407,7 +408,7 @@
                                 <include>org/apache/aries/subsystem/itests/tb1/**</include>
                             </includes>
                             <outputDirectory>${project.build.directory}/test-classes/feature1</outputDirectory>
-                            <finalName>tb1</finalName>
+                            <classifier>tb1-feature1</classifier>
                         </configuration>
                         <phase>process-test-classes</phase>
                     </execution>
@@ -426,7 +427,7 @@
                                 <include>org/apache/aries/subsystem/itests/tb3/**</include>
                             </includes>
                             <outputDirectory>${project.build.directory}/test-classes/feature2</outputDirectory>
-                            <finalName>tb2</finalName>
+                            <classifier>tb2-feature2</classifier>
                         </configuration>
                         <phase>process-test-classes</phase>
                     </execution>
@@ -444,7 +445,7 @@
                                 <include>org/apache/aries/subsystem/itests/tb3/**</include>
                             </includes>
                             <outputDirectory>${project.build.directory}/test-classes/feature1</outputDirectory>
-                            <finalName>tb3</finalName>
+                            <classifier>tb3-feature1</classifier>
                         </configuration>
                         <phase>process-test-classes</phase>
                     </execution>
@@ -462,7 +463,7 @@
                                 <include>org/apache/aries/subsystem/itests/tb3/**</include>
                             </includes>
                             <outputDirectory>${project.build.directory}/test-classes/feature2</outputDirectory>
-                            <finalName>tb3</finalName>
+                            <classifier>tb3-feature2</classifier>
                         </configuration>
                         <phase>process-test-classes</phase>
                     </execution>
@@ -480,7 +481,7 @@
                                 <include>org/apache/aries/subsystem/itests/tb3/**</include>
                             </includes>
                             <outputDirectory>${project.build.directory}/test-classes/feature3</outputDirectory>
-                            <finalName>tb3</finalName>
+                            <classifier>tb3-feature3</classifier>
                         </configuration>
                         <phase>process-test-classes</phase>
                     </execution>
@@ -498,7 +499,7 @@
                                 <include>org/apache/aries/subsystem/itests/tb4/**</include>
                             </includes>
                             <outputDirectory>${project.build.directory}/test-classes/composite2</outputDirectory>
-                            <finalName>tb4</finalName>
+                            <classifier>tb4-composite2</classifier>
                         </configuration>
                         <phase>process-test-classes</phase>
                     </execution>
@@ -519,7 +520,7 @@
                                 <include>org/apache/aries/subsystem/itests/hello/impl/**</include>
                             </includes>
                             <outputDirectory>${project.build.directory}/test-classes/hello</outputDirectory>
-                            <finalName>helloImpl</finalName>
+                            <classifier>hello-impl</classifier>
                         </configuration>
                         <phase>process-test-classes</phase>
                     </execution>
@@ -538,7 +539,7 @@
                                 <include>org/apache/aries/subsystem/itests/cmcontent/impl/**</include>
                             </includes>
                             <outputDirectory>${project.build.directory}/test-classes/cmContent</outputDirectory>
-                            <finalName>cmContentBundleZ</finalName>
+                            <classifier>cm-content-bundleZ</classifier>
                         </configuration>
                         <phase>process-test-classes</phase>
                     </execution>
@@ -553,7 +554,7 @@
                                 <manifestFile>src/test/bundles/customContentBundleA/META-INF/MANIFEST.MF</manifestFile>
                             </archive>
                             <outputDirectory>${project.build.directory}/test-classes/customContent</outputDirectory>
-                            <finalName>customContentBundleA</finalName>
+                            <classifier>custom-content-bundleA</classifier>
                         </configuration>
                         <phase>process-test-classes</phase>
                     </execution>
@@ -568,7 +569,7 @@
                                 <manifestFile>src/test/bundles/customContentBundleB/META-INF/MANIFEST.MF</manifestFile>
                             </archive>
                             <outputDirectory>${project.build.directory}/test-classes/customContent1</outputDirectory>
-                            <finalName>customContentBundleB</finalName>
+                            <classifier>custom-content-bundleB</classifier>
                         </configuration>
                         <phase>process-test-classes</phase>
                     </execution>
@@ -583,7 +584,7 @@
                                 <manifestFile>src/test/bundles/customContentBundleC/META-INF/MANIFEST.MF</manifestFile>
                             </archive>
                             <outputDirectory>${project.build.directory}/test-classes/customContent2</outputDirectory>
-                            <finalName>customContentBundleC</finalName>
+                            <classifier>custom-content-bundleC</classifier>
                         </configuration>
                         <phase>process-test-classes</phase>
                     </execution>
@@ -598,7 +599,7 @@
                                 <manifestFile>src/test/bundles/customContentBundleD/META-INF/MANIFEST.MF</manifestFile>
                             </archive>
                             <outputDirectory>${project.build.directory}/test-classes/customContent3</outputDirectory>
-                            <finalName>customContentBundleD</finalName>
+                            <classifier>custom-content-bundleD</classifier>
                         </configuration>
                         <phase>process-test-classes</phase>
                     </execution>
@@ -617,7 +618,7 @@
                                 <include>org/apache/aries/subsystem/itests/dynamicImport/**</include>
                             </includes>
                             <outputDirectory>${project.build.directory}/test-classes/dynamicImport</outputDirectory>
-                            <finalName>dynamicImport</finalName>
+                            <classifier>dynamic-import-impl</classifier>
                         </configuration>
                         <phase>process-test-classes</phase>
                     </execution>
@@ -638,7 +639,7 @@
                                 <include>org/apache/aries/subsystem/itests/aries1608provider/**</include>
                             </includes>
                             <outputDirectory>${project.build.directory}/test-classes/aries1608</outputDirectory>
-                            <finalName>aries1608provider</finalName>
+                            <classifier>aries1608provider</classifier>
                         </configuration>
                         <phase>process-test-classes</phase>
                     </execution>
@@ -657,7 +658,7 @@
                                 <include>org/apache/aries/subsystem/itests/aries1608required/**</include>
                             </includes>
                             <outputDirectory>${project.build.directory}/test-classes/aries1608</outputDirectory>
-                            <finalName>aries1608required</finalName>
+                            <classifier>aries-bundlearies1608required</classifier>
                         </configuration>
                         <phase>process-test-classes</phase>
                     </execution>
@@ -676,7 +677,7 @@
                                 <include>org/apache/aries/subsystem/itests/aries1523host/**</include>
                             </includes>
                             <outputDirectory>${project.build.directory}/test-classes/aries1523</outputDirectory>
-                            <finalName>aries1523host</finalName>
+                            <classifier>aries1523host</classifier>
                         </configuration>
                         <phase>process-test-classes</phase>
                     </execution>
@@ -695,11 +696,46 @@
                                 <include>org/apache/aries/subsystem/itests/aries1523fragment/**</include>
                             </includes>
                             <outputDirectory>${project.build.directory}/test-classes/aries1523</outputDirectory>
-                            <finalName>aries1523fragment</finalName>
+                            <classifier>aries1523fragment</classifier>
                         </configuration>
                         <phase>process-test-classes</phase>
                     </execution>
-
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>${maven-antrun-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>process-test-classes</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <copy file="${project.build.directory}/test-classes/nobsn/${project.artifactId}-${project.version}-tb1-nobsn.jar" tofile="${project.build.directory}/test-classes/nobsn/tb1.jar"/>
+                                <copy file="${project.build.directory}/test-classes/application1/${project.artifactId}-${project.version}-tb1-application1.jar" tofile="${project.build.directory}/test-classes/application1/tb1.jar"/>
+                                <copy file="${project.build.directory}/test-classes/feature1/${project.artifactId}-${project.version}-tb1-feature1.jar" tofile="${project.build.directory}/test-classes/feature1/tb1.jar"/>
+                                <copy file="${project.build.directory}/test-classes/feature2/${project.artifactId}-${project.version}-tb2-feature2.jar" tofile="${project.build.directory}/test-classes/feature2/tb2.jar"/>
+                                <copy file="${project.build.directory}/test-classes/feature1/${project.artifactId}-${project.version}-tb3-feature1.jar" tofile="${project.build.directory}/test-classes/feature1/tb3.jar"/>
+                                <copy file="${project.build.directory}/test-classes/feature2/${project.artifactId}-${project.version}-tb3-feature2.jar" tofile="${project.build.directory}/test-classes/feature2/tb3.jar"/>
+                                <copy file="${project.build.directory}/test-classes/feature3/${project.artifactId}-${project.version}-tb3-feature3.jar" tofile="${project.build.directory}/test-classes/feature3/tb3.jar"/>
+                                <copy file="${project.build.directory}/test-classes/composite2/${project.artifactId}-${project.version}-tb4-composite2.jar" tofile="${project.build.directory}/test-classes/composite2/tb4.jar"/>
+                                <copy file="${project.build.directory}/test-classes/hello/${project.artifactId}-${project.version}-hello-impl.jar" tofile="${project.build.directory}/test-classes/hello/helloImpl.jar"/>
+                                <copy file="${project.build.directory}/test-classes/cmContent/${project.artifactId}-${project.version}-cm-content-bundleZ.jar" tofile="${project.build.directory}/test-classes/cmContent/cmContentBundleZ.jar"/>
+                                <copy file="${project.build.directory}/test-classes/customContent/${project.artifactId}-${project.version}-custom-content-bundleA.jar" tofile="${project.build.directory}/test-classes/customContent/customContentBundleA.jar"/>
+                                <copy file="${project.build.directory}/test-classes/customContent1/${project.artifactId}-${project.version}-custom-content-bundleB.jar" tofile="${project.build.directory}/test-classes/customContent1/customContentBundleB.jar"/>
+                                <copy file="${project.build.directory}/test-classes/customContent2/${project.artifactId}-${project.version}-custom-content-bundleC.jar" tofile="${project.build.directory}/test-classes/customContent2/customContentBundleC.jar"/>
+                                <copy file="${project.build.directory}/test-classes/customContent3/${project.artifactId}-${project.version}-custom-content-bundleD.jar" tofile="${project.build.directory}/test-classes/customContent3/customContentBundleD.jar"/>
+                                <copy file="${project.build.directory}/test-classes/dynamicImport/${project.artifactId}-${project.version}-dynamic-import-impl.jar" tofile="${project.build.directory}/test-classes/dynamicImport/dynamicImport.jar"/>
+                                <copy file="${project.build.directory}/test-classes/aries1608/${project.artifactId}-${project.version}-aries1608provider.jar" tofile="${project.build.directory}/test-classes/aries1608/aries1608provider.jar"/>
+                                <copy file="${project.build.directory}/test-classes/aries1608/${project.artifactId}-${project.version}-aries-bundlearies1608required.jar" tofile="${project.build.directory}/test-classes/aries1608/aries1608required.jar"/>
+                                <copy file="${project.build.directory}/test-classes/aries1523/${project.artifactId}-${project.version}-aries1523host.jar" tofile="${project.build.directory}/test-classes/aries1523/aries1523host.jar"/>
+                                <copy file="${project.build.directory}/test-classes/aries1523/${project.artifactId}-${project.version}-aries1523fragment.jar" tofile="${project.build.directory}/test-classes/aries1523/aries1523fragment.jar"/>
+                            </target>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
@@ -886,6 +922,15 @@
                 <configuration>
                     <forkCount>1</forkCount>
                     <reuseForks>false</reuseForks>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>ianal-maven-plugin</artifactId>
+                <configuration>
+                    <!-- test artifacts does not contain necessary files and are never rele -->
+                    <skip>true</skip>
                 </configuration>
             </plugin>
         </plugins>
