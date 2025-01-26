@@ -25,7 +25,7 @@
     <parent>
         <groupId>org.apache</groupId>
         <artifactId>apache</artifactId>
-        <version>30</version>
+        <version>33</version>
         <relativePath/>
     </parent>
 
@@ -233,11 +233,11 @@
         <maven-paxexam-plugin.version>1.2.4</maven-paxexam-plugin.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <org.apache.aries.versioning.plugin.version>0.3.0</org.apache.aries.versioning.plugin.version>
-        <ianal-maven-plugin.version>1.0-alpha-1</ianal-maven-plugin.version>
         <animal-sniffer-enforcer-rule.version>1.6</animal-sniffer-enforcer-rule.version>
+        <tools-maven-plugin.version>1.4</tools-maven-plugin.version>
 
         <!--Other-->
-        <java.source.version>1.8</java.source.version>
+        <java.source.version>8</java.source.version>
     </properties>
 
     <build>
@@ -454,12 +454,12 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
-                        <optimize>true</optimize>
                         <debug>true</debug>
                         <showDeprecation>true</showDeprecation>
                         <showWarnings>true</showWarnings>
                         <source>${java.source.version}</source>
                         <target>${java.source.version}</target>
+                        <release>${java.source.version}</release>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -533,9 +533,9 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>ianal-maven-plugin</artifactId>
-                <version>${ianal-maven-plugin.version}</version>
+                <groupId>org.apache.geronimo.genesis.plugins</groupId>
+                <artifactId>tools-maven-plugin</artifactId>
+                <version>${tools-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
