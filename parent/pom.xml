@@ -226,7 +226,6 @@
         <versions-maven-plugin.version>1.1</versions-maven-plugin.version>
         <findbugs-maven-plugin.version>3.0.5</findbugs-maven-plugin.version>
         <maven-bundle-plugin.version>2.5.0</maven-bundle-plugin.version>
-        <apache-rat-plugin.version>0.12</apache-rat-plugin.version>
         <maven-license-plugin.version>1.4.0</maven-license-plugin.version>
         <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
         <maven-pmd-plugin.version>2.4</maven-pmd-plugin.version>
@@ -640,7 +639,6 @@
                     <plugin>
                         <groupId>org.apache.rat</groupId>
                         <artifactId>apache-rat-plugin</artifactId>
-                        <version>${apache-rat-plugin.version}</version>
                         <executions>
                             <execution>
                                 <phase>verify</phase>
