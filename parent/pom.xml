@@ -221,7 +221,6 @@
 
         <!--Plugin versions-->
         <lifecycle-mapping.version>1.0.0</lifecycle-mapping.version>
-        <maven-shade-plugin.version>1.2.2</maven-shade-plugin.version>
         <versions-maven-plugin.version>1.1</versions-maven-plugin.version>
         <findbugs-maven-plugin.version>3.0.5</findbugs-maven-plugin.version>
         <maven-bundle-plugin.version>2.5.0</maven-bundle-plugin.version>
@@ -383,11 +382,6 @@
                     <configuration>
                         <encoding>UTF-8</encoding>
                     </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-shade-plugin</artifactId>
-                    <version>${maven-shade-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
