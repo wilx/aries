@@ -220,7 +220,6 @@
         <slf4j.version>1.7.5</slf4j.version>
 
         <!--Plugin versions-->
-        <maven-release-plugin.version>2.5.2</maven-release-plugin.version>
         <lifecycle-mapping.version>1.0.0</lifecycle-mapping.version>
         <maven-shade-plugin.version>1.2.2</maven-shade-plugin.version>
         <versions-maven-plugin.version>1.1</versions-maven-plugin.version>
@@ -284,14 +283,6 @@
 
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>${maven-release-plugin.version}</version>
-                    <configuration>
-                        <autoVersionSubmodules>true</autoVersionSubmodules>
-                    </configuration>
-                </plugin>
                 <!--TODO TEXT. This plugin's configuration is used in m2e only.-->
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
