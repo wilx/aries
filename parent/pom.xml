@@ -39,11 +39,11 @@
         Aries parent pom
     </description>
 
-    <url>http://aries.apache.org</url>
+    <url>https://aries.apache.org</url>
 
     <organization>
         <name>The Apache Software Foundation</name>
-        <url>http://www.apache.org</url>
+        <url>https://www.apache.org</url>
     </organization>
 
     <inceptionYear>2009</inceptionYear>
@@ -66,7 +66,7 @@
             <subscribe>user-subscribe@aries.apache.org</subscribe>
             <unsubscribe>user-unsubscribe@aries.apache.org</unsubscribe>
             <post>mailto:user@aries.apache.org</post>
-            <archive>http://mail-archives.apache.org/mod_mbox/aries-user/</archive>
+            <archive>https://mail-archives.apache.org/mod_mbox/aries-user/</archive>
         </mailingList>
 
         <mailingList>
@@ -74,7 +74,7 @@
             <subscribe>dev-subscribe@aries.apache.org</subscribe>
             <unsubscribe>dev-unsubscribe@aries.apache.org</unsubscribe>
             <post>mailto:dev@aries.apache.org</post>
-            <archive>http://mail-archives.apache.org/mod_mbox/aries-dev/</archive>
+            <archive>https://mail-archives.apache.org/mod_mbox/aries-dev/</archive>
         </mailingList>
 
         <mailingList>
@@ -82,14 +82,14 @@
             <subscribe>commits-subscribe@aries.apache.org</subscribe>
             <unsubscribe>commits-unsubscribe@aries.apache.org</unsubscribe>
             <post>mailto:commits@aries.apache.org</post>
-            <archive>http://mail-archives.apache.org/mod_mbox/aries-commits/</archive>
+            <archive>https://mail-archives.apache.org/mod_mbox/aries-commits/</archive>
         </mailingList>
     </mailingLists>
 
     <repositories>
         <repository>
             <id>EclipseLink Repo</id>
-            <url>http://download.eclipse.org/rt/eclipselink/maven.repo/</url>
+            <url>https://download.eclipse.org/rt/eclipselink/maven.repo/</url>
         </repository>
         <repository>
             <id>ops4j.sonatype.snapshots.deploy</id>
