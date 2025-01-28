@@ -39,11 +39,11 @@
         Aries parent pom
     </description>
 
-    <url>http://aries.apache.org</url>
+    <url>https://aries.apache.org</url>
 
     <organization>
         <name>The Apache Software Foundation</name>
-        <url>http://www.apache.org</url>
+        <url>https://www.apache.org</url>
     </organization>
 
     <inceptionYear>2009</inceptionYear>
@@ -66,7 +66,7 @@
             <subscribe>user-subscribe@aries.apache.org</subscribe>
             <unsubscribe>user-unsubscribe@aries.apache.org</unsubscribe>
             <post>mailto:user@aries.apache.org</post>
-            <archive>http://mail-archives.apache.org/mod_mbox/aries-user/</archive>
+            <archive>https://mail-archives.apache.org/mod_mbox/aries-user/</archive>
         </mailingList>
 
         <mailingList>
@@ -74,7 +74,7 @@
             <subscribe>dev-subscribe@aries.apache.org</subscribe>
             <unsubscribe>dev-unsubscribe@aries.apache.org</unsubscribe>
             <post>mailto:dev@aries.apache.org</post>
-            <archive>http://mail-archives.apache.org/mod_mbox/aries-dev/</archive>
+            <archive>https://mail-archives.apache.org/mod_mbox/aries-dev/</archive>
         </mailingList>
 
         <mailingList>
@@ -82,14 +82,14 @@
             <subscribe>commits-subscribe@aries.apache.org</subscribe>
             <unsubscribe>commits-unsubscribe@aries.apache.org</unsubscribe>
             <post>mailto:commits@aries.apache.org</post>
-            <archive>http://mail-archives.apache.org/mod_mbox/aries-commits/</archive>
+            <archive>https://mail-archives.apache.org/mod_mbox/aries-commits/</archive>
         </mailingList>
     </mailingLists>
 
     <repositories>
         <repository>
             <id>EclipseLink Repo</id>
-            <url>http://download.eclipse.org/rt/eclipselink/maven.repo/</url>
+            <url>https://download.eclipse.org/rt/eclipselink/maven.repo/</url>
         </repository>
         <repository>
             <id>ops4j.sonatype.snapshots.deploy</id>
@@ -220,18 +220,15 @@
         <slf4j.version>1.7.5</slf4j.version>
 
         <!--Plugin versions-->
-        <maven-release-plugin.version>2.5.2</maven-release-plugin.version>
         <lifecycle-mapping.version>1.0.0</lifecycle-mapping.version>
-        <maven-shade-plugin.version>1.2.2</maven-shade-plugin.version>
         <versions-maven-plugin.version>1.1</versions-maven-plugin.version>
         <findbugs-maven-plugin.version>3.0.5</findbugs-maven-plugin.version>
         <maven-bundle-plugin.version>2.5.0</maven-bundle-plugin.version>
-        <apache-rat-plugin.version>0.12</apache-rat-plugin.version>
         <maven-license-plugin.version>1.4.0</maven-license-plugin.version>
+        <!-- TODO do not override javadoc plugin version when apache parent v34 is released-->
         <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
         <maven-pmd-plugin.version>2.4</maven-pmd-plugin.version>
         <maven-paxexam-plugin.version>1.2.4</maven-paxexam-plugin.version>
-        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <org.apache.aries.versioning.plugin.version>0.3.0</org.apache.aries.versioning.plugin.version>
         <animal-sniffer-enforcer-rule.version>1.6</animal-sniffer-enforcer-rule.version>
         <tools-maven-plugin.version>1.4</tools-maven-plugin.version>
@@ -285,14 +282,6 @@
 
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>${maven-release-plugin.version}</version>
-                    <configuration>
-                        <autoVersionSubmodules>true</autoVersionSubmodules>
-                    </configuration>
-                </plugin>
                 <!--TODO TEXT. This plugin's configuration is used in m2e only.-->
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
@@ -396,11 +385,6 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-shade-plugin</artifactId>
-                    <version>${maven-shade-plugin.version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <configuration>
                         <redirectTestOutputToFile>true</redirectTestOutputToFile>
@@ -452,7 +436,6 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${maven-compiler-plugin.version}</version>
                     <configuration>
                         <debug>true</debug>
                         <showDeprecation>true</showDeprecation>
@@ -640,7 +623,6 @@
                     <plugin>
                         <groupId>org.apache.rat</groupId>
                         <artifactId>apache-rat-plugin</artifactId>
-                        <version>${apache-rat-plugin.version}</version>
                         <executions>
                             <execution>
                                 <phase>verify</phase>
