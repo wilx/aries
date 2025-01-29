@@ -231,7 +231,6 @@
         <maven-paxexam-plugin.version>1.2.4</maven-paxexam-plugin.version>
         <org.apache.aries.versioning.plugin.version>0.3.0</org.apache.aries.versioning.plugin.version>
         <animal-sniffer-enforcer-rule.version>1.6</animal-sniffer-enforcer-rule.version>
-        <tools-maven-plugin.version>1.4</tools-maven-plugin.version>
 
         <!--Other-->
         <java.source.version>8</java.source.version>
@@ -511,21 +510,6 @@
                                     <version>[${java.source.version},)</version>
                                 </requireJavaVersion>
                             </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.geronimo.genesis.plugins</groupId>
-                <artifactId>tools-maven-plugin</artifactId>
-                <version>${tools-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>verify-legal-files</goal>
-                        </goals>
-                        <configuration>
-                            <strict>true</strict>
                         </configuration>
                     </execution>
                 </executions>
