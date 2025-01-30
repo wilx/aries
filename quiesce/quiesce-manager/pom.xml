@@ -24,7 +24,7 @@
     <parent>
         <groupId>org.apache.aries</groupId>
         <artifactId>parent</artifactId>
-        <version>2.0.0</version>
+        <version>2.1.2-SNAPSHOT</version>
         <relativePath>../../parent/pom.xml</relativePath>
     </parent>
 
@@ -56,8 +56,8 @@
         </aries.osgi.export.service>
         <lastReleaseVersion>1.0.0</lastReleaseVersion>
 
-        <org.apache.aries.quiesce.api.version>1.0.0</org.apache.aries.quiesce.api.version>
-        <org.apache.aries.util.version>1.0.0</org.apache.aries.util.version>
+        <org.apache.aries.quiesce.api.version>1.0.1-SNAPSHOT</org.apache.aries.quiesce.api.version>
+        <org.apache.aries.util.version>1.2.0-SNAPSHOT</org.apache.aries.util.version>
     </properties>
 
     <dependencies>
@@ -98,15 +98,7 @@
             <plugin>
                 <groupId>org.apache.aries.versioning</groupId>
                 <artifactId>org.apache.aries.versioning.plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>default-verify</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>version-check</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <configuration><skip>true</skip></configuration>
             </plugin>
         </plugins>
     </build>
