@@ -47,5 +47,6 @@ jobs:
     - name: Build
       shell: bash
       run: |
+        mvn -U -e -B -ntp clean install -f parent/pom.xml
         mvn -U -e -B -ntp clean install -f testsupport/pom.xml
         mvn -U -e -B -ntp clean install -f blueprint/pom.xml
