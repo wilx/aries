@@ -40,6 +40,7 @@
         <asm-debug-all.version>5.0.3</asm-debug-all.version>
         <commons-jexl.version>2.1.1</commons-jexl.version>
         <depends-maven-plugin.version>1.5.0</depends-maven-plugin.version>
+        <javax.inject.version>1</javax.inject.version>
         <org.apache.aries.blueprint.jexl.evaluator.version>1.0.0</org.apache.aries.blueprint.jexl.evaluator.version>
         <org.apache.aries.blueprint.sample.version>1.0.0</org.apache.aries.blueprint.sample.version>
         <org.apache.aries.blueprint.version>1.0.0</org.apache.aries.blueprint.version>
@@ -103,11 +104,19 @@
             <artifactId>org.osgi.compendium</artifactId>
             <scope>provided</scope>
         </dependency>
+        <!-- TODO ARIES-2165 restore dependency
         <dependency>
             <groupId>org.apache.aries.testsupport</groupId>
             <artifactId>org.apache.aries.testsupport.unit</artifactId>
             <version>${org.apache.aries.testsupport.unit.version}</version>
             <scope>test</scope>
+        </dependency>
+        -->
+        <!-- TODO ARIES-2165 remove testsupport transitive dependency -->
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>${javax.inject.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.aries.blueprint</groupId>
