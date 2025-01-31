@@ -32,7 +32,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        java: [ 8 ]
+        java: [ 8, 11, 17, 21 ]
         os: [ ubuntu-latest ]
     name: JDK${{ matrix.java }} ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
@@ -50,6 +50,9 @@ jobs:
     - name: Build testsupport
       shell: bash
       run: mvn -U -e -B -ntp clean install -f testsupport
+    - name: Build util
+      shell: bash
+      run: mvn -U -e -B -ntp clean install -f util
     - name: Build web
       shell: bash
       run: mvn -U -e -B -ntp clean install -f web
