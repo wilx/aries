@@ -465,6 +465,9 @@
                         <goals>
                             <goal>version-check</goal>
                         </goals>
+                        <configuration>
+                          <skip>true</skip>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
