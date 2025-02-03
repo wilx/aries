@@ -86,13 +86,6 @@
         </mailingList>
     </mailingLists>
 
-    <repositories>
-        <repository>
-            <id>EclipseLink Repo</id>
-            <url>https://download.eclipse.org/rt/eclipselink/maven.repo/</url>
-        </repository>
-    </repositories>
-
     <pluginRepositories>
         <pluginRepository>
             <id>apache.snapshots</id>
