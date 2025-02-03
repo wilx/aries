@@ -17,6 +17,7 @@ on:
     paths:
       - parent/**
       - testsupport/**
+      - util/**
       - quiesce/**
       - .github/workflows/quiesce.yml
   push:
