@@ -91,18 +91,6 @@
             <id>EclipseLink Repo</id>
             <url>https://download.eclipse.org/rt/eclipselink/maven.repo/</url>
         </repository>
-        <repository>
-            <id>ops4j.sonatype.snapshots.deploy</id>
-            <url>https://oss.sonatype.org/content/repositories/ops4j-snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-                <checksumPolicy>ignore</checksumPolicy>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </repository>
     </repositories>
 
     <pluginRepositories>
