@@ -40,4 +40,7 @@ updates:
       - dependency-name: "org.mockito:mockito*"
         versions:
           - ">=5.0.0" # does not support java 8
+      - dependency-name: "org.eclipse:osgi" # should be upgraded to org.eclipse.platform:org.eclipse.osgi
+        versions:
+          - ">=3.9.1" # higher version removed CompositeBundle used by some artifacts
 
