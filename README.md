@@ -5,7 +5,7 @@ model.
 
 See [Apache Aries Website](http://aries.apache.org/).
 
-- Application - the implementation is using `org.osgi.service.framework` from Eclipse Equinox that is [available only in versions 3.5..3.7](https://bugs.eclipse.org/bugs/show_bug.cgi?id=345790)
+- [![Application - CI Build](https://github.com/apache/aries/actions/workflows/application.yml/badge.svg)](https://github.com/apache/aries/actions/workflows/application.yml) - the implementation is using `org.osgi.service.framework` from Eclipse Equinox that is [available only in versions 3.5..3.7](https://bugs.eclipse.org/bugs/show_bug.cgi?id=345790)
 - [![Async - CI Build](https://github.com/apache/aries/actions/workflows/async.yml/badge.svg)](https://github.com/apache/aries/actions/workflows/async.yml)
 - [![Blueprint - CI Build](https://github.com/apache/aries/actions/workflows/blueprint.yml/badge.svg)](https://github.com/apache/aries/actions/workflows/blueprint.yml)
 - [![eba-maven-plugin - CI Build](https://github.com/apache/aries/actions/workflows/eba-maven-plugin.yml/badge.svg)](https://github.com/apache/aries/actions/workflows/eba-maven-plugin.yml)

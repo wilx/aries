@@ -174,6 +174,7 @@ public class MinimumImportsTest extends AbstractIntegrationTest {
 
                 // framework / core bundles
                 mavenBundle("org.osgi", "org.osgi.core").versionAsInProject(),
+                mavenBundle("org.osgi", "org.osgi.compendium").versionAsInProject(),
                 mavenBundle("org.ops4j.pax.logging", "pax-logging-api").versionAsInProject(),
                 mavenBundle("org.ops4j.pax.logging", "pax-logging-service").versionAsInProject(),
 
@@ -182,7 +183,7 @@ public class MinimumImportsTest extends AbstractIntegrationTest {
 
                 // Bundles
                 junitBundles(),
-                mavenBundle("org.apache.aries.testsupport", "org.apache.aries.testsupport.unit").versionAsInProject(),
+                // mavenBundle("org.apache.aries.testsupport", "org.apache.aries.testsupport.unit").versionAsInProject(),
 
                 // Bundles
                 mavenBundle("org.apache.aries.application", "org.apache.aries.application.api").versionAsInProject(),
@@ -197,6 +198,7 @@ public class MinimumImportsTest extends AbstractIntegrationTest {
                 mavenBundle("org.apache.aries.application", "org.apache.aries.application.modeller").versionAsInProject(),
                 mavenBundle("org.apache.aries.application", "org.apache.aries.application.deployment.management").versionAsInProject(),
                 mavenBundle("org.apache.aries.blueprint", "org.apache.aries.blueprint").versionAsInProject(),
+//                mavenBundle("org.apache.aries.blueprint", "org.apache.aries.blueprint.cm").versionAsInProject().start(),
                 mavenBundle("org.ow2.asm", "asm-all").versionAsInProject(),
                 mavenBundle("org.apache.aries.proxy", "org.apache.aries.proxy").versionAsInProject());
     }
