@@ -37,6 +37,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>application</module>
         <module>async</module>
         <module>blueprint</module>
         <module>eba-maven-plugin</module>
@@ -59,7 +60,6 @@
 
         <!-- excluded as not having CI build-->
         <!--
-        <module>application</module>
         <module>samples</module>
         <module>sandbox</module>
         <module>tutorials</module>

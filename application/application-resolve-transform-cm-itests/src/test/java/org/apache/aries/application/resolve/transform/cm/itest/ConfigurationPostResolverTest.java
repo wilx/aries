@@ -149,7 +149,7 @@ public class ConfigurationPostResolverTest extends AbstractIntegrationTest {
         return options(
         		baseOptions(),
                 mavenBundle("org.osgi", "org.osgi.compendium").versionAsInProject(),
-                mavenBundle("org.apache.aries.testsupport", "org.apache.aries.testsupport.unit").versionAsInProject(),
+//                mavenBundle("org.apache.aries.testsupport", "org.apache.aries.testsupport.unit").versionAsInProject(),
                 mavenBundle("org.apache.aries.blueprint", "org.apache.aries.blueprint").versionAsInProject(),
                 mavenBundle("org.ow2.asm", "asm-all").versionAsInProject(),
                 mavenBundle("org.apache.aries.proxy", "org.apache.aries.proxy").versionAsInProject(),

@@ -318,6 +318,7 @@ public class OBRResolverTest extends AbstractIntegrationTest {
 
                 // framework / core bundles
                 mavenBundle("org.osgi", "org.osgi.core").versionAsInProject(),
+                mavenBundle("org.osgi", "org.osgi.compendium").versionAsInProject(),
                 mavenBundle("org.ops4j.pax.logging", "pax-logging-api").versionAsInProject(),
                 mavenBundle("org.ops4j.pax.logging", "pax-logging-service").versionAsInProject(),
 
@@ -326,7 +327,7 @@ public class OBRResolverTest extends AbstractIntegrationTest {
 
                 // Bundles
                 junitBundles(),
-                mavenBundle("org.apache.aries.testsupport", "org.apache.aries.testsupport.unit").versionAsInProject(),
+                // mavenBundle("org.apache.aries.testsupport", "org.apache.aries.testsupport.unit").versionAsInProject(),
 
                 // Bundles
                 mavenBundle("org.apache.aries.blueprint", "org.apache.aries.blueprint").versionAsInProject(),
