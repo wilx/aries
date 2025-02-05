@@ -86,25 +86,6 @@
         </mailingList>
     </mailingLists>
 
-    <repositories>
-        <repository>
-            <id>EclipseLink Repo</id>
-            <url>https://download.eclipse.org/rt/eclipselink/maven.repo/</url>
-        </repository>
-        <repository>
-            <id>ops4j.sonatype.snapshots.deploy</id>
-            <url>https://oss.sonatype.org/content/repositories/ops4j-snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-                <checksumPolicy>ignore</checksumPolicy>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </repository>
-    </repositories>
-
     <pluginRepositories>
         <pluginRepository>
             <id>apache.snapshots</id>
@@ -224,7 +205,6 @@
         <versions-maven-plugin.version>1.1</versions-maven-plugin.version>
         <findbugs-maven-plugin.version>3.0.5</findbugs-maven-plugin.version>
         <maven-bundle-plugin.version>5.1.9</maven-bundle-plugin.version>
-        <maven-license-plugin.version>1.4.0</maven-license-plugin.version>
         <!-- TODO do not override javadoc plugin version when apache parent v34 is released-->
         <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
         <maven-pmd-plugin.version>2.4</maven-pmd-plugin.version>
@@ -637,38 +617,6 @@
                                 <exclude>**/dependency-reduced-pom.xml</exclude>
                             </excludes>
                         </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>license-check</id>
-            <pluginRepositories>
-                <pluginRepository>
-                    <id>mc-release</id>
-                    <url>http://mc-repo.googlecode.com/svn/maven2/releases</url>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                </pluginRepository>
-            </pluginRepositories>
-            <build>
-                <defaultGoal>license:check</defaultGoal>
-                <plugins>
-                    <plugin>
-                        <groupId>com.google.code.maven-license-plugin</groupId>
-                        <artifactId>maven-license-plugin</artifactId>
-                        <version>${maven-license-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>check</goal>
-                                </goals>
-                            </execution>
-                        </executions>
                     </plugin>
                 </plugins>
             </build>
