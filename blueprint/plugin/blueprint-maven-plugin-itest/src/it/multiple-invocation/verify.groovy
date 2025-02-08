@@ -19,7 +19,7 @@
 
 def p1 = new File(basedir, 'target/generated-sources/blueprint/OSGI-INF/blueprint/p1.xml')
 assert p1.exists()
-def xmlP1 = new groovy.util.XmlSlurper().parse(p1)
+def xmlP1 = new groovy.xml.XmlSlurper().parse(p1)
 assert xmlP1.name() == 'blueprint'
 assert xmlP1.'@default-activation' == 'lazy'
 assert xmlP1.'@default-availability' == 'mandatory'
@@ -30,7 +30,7 @@ assert xmlP1.bean.@id == 't1'
 
 def p2 = new File(basedir, 'target/generated-sources/blueprint/OSGI-INF/blueprint/p2.xml')
 assert p2.exists()
-def xmlP2 = new groovy.util.XmlSlurper().parse(p2)
+def xmlP2 = new groovy.xml.XmlSlurper().parse(p2)
 assert xmlP2.name() == 'blueprint'
 assert xmlP2.'@default-activation' == 'eager'
 assert xmlP2.'@default-availability' == 'optional'
