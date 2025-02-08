@@ -19,7 +19,7 @@
 
 def file = new File(basedir, 'target/classes/custom/my/blueprint.xml')
 assert file.exists()
-def xml = new groovy.util.XmlSlurper().parse(file)
+def xml = new groovy.xml.XmlSlurper().parse(file)
 assert xml.name() == 'blueprint'
 assert xml.bean.@class == 'p1.T1'
 assert xml.bean.@id == 't1'

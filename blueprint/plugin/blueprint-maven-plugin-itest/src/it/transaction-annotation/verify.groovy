@@ -19,17 +19,17 @@
 
 def fileP1 = new File(basedir, 'target/generated-sources/blueprint/OSGI-INF/blueprint/p1.xml')
 assert fileP1.exists()
-def xml1 = new groovy.util.XmlSlurper().parse(fileP1)
+def xml1 = new groovy.xml.XmlSlurper().parse(fileP1)
 assert xml1."enable-annotations".size() == 0
 assert xml1.bean.find{ it.@class == 'p1.T1'}.@id == 't1'
 assert xml1.bean.transaction.find{ it.name() == 'transaction' }.size() == 1
 
 def fileP2 = new File(basedir, 'target/generated-sources/blueprint/OSGI-INF/blueprint/p2.xml')
 assert fileP2.exists()
-def xml2 = new groovy.util.XmlSlurper().parse(fileP2)
+def xml2 = new groovy.xml.XmlSlurper().parse(fileP2)
 assert xml2."enable-annotations".size() == 1
 
 def fileP3 = new File(basedir, 'target/generated-sources/blueprint/OSGI-INF/blueprint/p3.xml')
 assert fileP3.exists()
-def xml3 = new groovy.util.XmlSlurper().parse(fileP3)
+def xml3 = new groovy.xml.XmlSlurper().parse(fileP3)
 assert xml3."enable-annotations".size() == 0
