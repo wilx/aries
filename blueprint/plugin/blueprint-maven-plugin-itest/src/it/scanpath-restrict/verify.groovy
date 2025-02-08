@@ -20,7 +20,7 @@
 def file = new File(basedir, 'target/generated-sources/blueprint/OSGI-INF/blueprint/autowire.xml')
 assert file.exists()
 
-def xml = new groovy.util.XmlSlurper().parse(file)
+def xml = new groovy.xml.XmlSlurper().parse(file)
 assert xml.bean.find {it.@class == 'p1.T1'}.size() == 0
 assert xml.bean.find {it.@class == 'p2.T2'}.@id == 't2'
 assert xml.bean.find {it.@class == 'p2.inner.T3'}.@id == 'test3'

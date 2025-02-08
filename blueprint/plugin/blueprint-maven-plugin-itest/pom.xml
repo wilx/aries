@@ -22,10 +22,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.apache.aries.blueprint</groupId>
-        <artifactId>blueprint-parent</artifactId>
-        <version>1.0.0</version>
-        <relativePath>../../blueprint-parent/pom.xml</relativePath>
+        <groupId>org.apache.aries</groupId>
+        <artifactId>parent</artifactId>
+        <version>2.1.2-SNAPSHOT</version>
+        <relativePath>../../../parent/pom.xml</relativePath>
     </parent>
 
     <groupId>org.apache.aries.blueprint</groupId>
@@ -35,11 +35,11 @@
     <name>Apache Aries Blueprint Maven Plugin iTest</name>
 
     <properties>
-        <java.target.version>1.7</java.target.version>
-        <java.source.version>1.7</java.source.version>
+        <aries.skip.version.check>true</aries.skip.version.check>
 
-        <blueprint-maven-plugin.version>1.9.1-SNAPSHOT</blueprint-maven-plugin.version>
+        <blueprint-maven-plugin.version>1.10.1-SNAPSHOT</blueprint-maven-plugin.version>
         <maven-invoker-plugin.version>3.9.0</maven-invoker-plugin.version>
+        <groovy.version>4.0.24</groovy.version>
     </properties>
 
     <scm>
@@ -51,43 +51,33 @@
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-invoker-plugin</artifactId>
+                <version>${maven-invoker-plugin.version}</version>
                 <configuration>
-                    <target>${java.target.version}</target>
-                    <source>${java.source.version}</source>
+                    <projectsDirectory>src/it</projectsDirectory>
+                    <pomIncludes>
+                        <pomInclude>*/pom.xml</pomInclude>
+                    </pomIncludes>
+                    <postBuildHookScript>verify</postBuildHookScript>
+                    <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
+                    <parallelThreads>4</parallelThreads>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.groovy</groupId>
+                        <artifactId>groovy-xml</artifactId>
+                        <version>${groovy.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>integration-test</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-invoker-plugin</artifactId>
-                        <version>${maven-invoker-plugin.version}</version>
-                        <configuration>
-                            <projectsDirectory>src/it</projectsDirectory>
-                            <pomIncludes>
-                                <pomInclude>*/pom.xml</pomInclude>
-                            </pomIncludes>
-                            <postBuildHookScript>verify</postBuildHookScript>
-                            <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
-                            <parallelThreads>4</parallelThreads>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>
