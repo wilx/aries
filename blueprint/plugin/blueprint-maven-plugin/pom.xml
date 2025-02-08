@@ -58,7 +58,7 @@
         <osgi.cmpn.version>7.0.0</osgi.cmpn.version>
         <persistence-api.version>1.0.2</persistence-api.version>
         <plexus-build-api.version>0.0.7</plexus-build-api.version>
-        <plexus-utils.version>3.0</plexus-utils.version>
+        <plexus-utils.version>4.0.2</plexus-utils.version>
         <xbean-finder-shaded.version>4.26</xbean-finder-shaded.version>
     </properties>
 
