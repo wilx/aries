@@ -25,6 +25,8 @@ import org.osgi.resource.Namespace;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Map;
+
 public class OsgiRequirementAdapter implements Requirement {
 	private static final Logger logger = LoggerFactory.getLogger(OsgiRequirementAdapter.class);
 	
@@ -44,7 +46,17 @@ public class OsgiRequirementAdapter implements Requirement {
 		return requirement.getDirectives().get(Constants.FILTER_DIRECTIVE);
 	}
 
-	public String getName() {
+    @Override
+    public Map<String, Object> getAttributes() {
+        return requirement.getAttributes();
+    }
+
+    @Override
+    public Map<String, String> getDirectives() {
+        return requirement.getDirectives();
+    }
+
+    public String getName() {
 		return NamespaceTranslator.translate(requirement.getNamespace());
 	}
 
