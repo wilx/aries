@@ -152,9 +152,9 @@ public class SubsystemManifestEqualityTest {
     public void testSubsystemManifestEquality() throws IOException {
 
         SubsystemManifest subsystemManifest1 = new SubsystemManifest(getClass()
-                .getResourceAsStream("/files/SUBSYSTEM.MF.1"));
+                .getResourceAsStream("/files/SUBSYSTEM1.MF"));
         SubsystemManifest subsystemManifest2 = new SubsystemManifest(getClass()
-                .getResourceAsStream("/files/SUBSYSTEM.MF.2"));
+                .getResourceAsStream("/files/SUBSYSTEM2.MF"));
         assertEquals(subsystemManifest1, subsystemManifest2);
     }
 
