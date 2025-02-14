@@ -24,7 +24,7 @@
     <parent>
         <groupId>org.apache.aries</groupId>
         <artifactId>parent</artifactId>
-        <version>2.1.1</version>
+        <version>2.1.2-SNAPSHOT</version>
         <relativePath>../../parent/pom.xml</relativePath>
     </parent>
 
@@ -44,21 +44,21 @@
         <asm.version>5.0.3</asm.version>
         <depends-maven-plugin.version>1.5.0</depends-maven-plugin.version>
         <exam.version>4.13.5</exam.version>
-        <logback.version>1.5.16</logback.version>
-        <org.apache.aries.blueprint.sample.version>1.0.0</org.apache.aries.blueprint.sample.version>
-        <org.apache.aries.blueprint.version>1.0.0</org.apache.aries.blueprint.version>
-        <org.apache.aries.proxy.version>1.0.1</org.apache.aries.proxy.version>
         <org.apache.aries.testsupport.unit.version>2.0.0-SNAPSHOT</org.apache.aries.testsupport.unit.version>
-        <org.apache.aries.util.version>1.0.0</org.apache.aries.util.version>
+        <org.apache.aries.util.version>1.2.0-SNAPSHOT</org.apache.aries.util.version>
         <org.apache.aries.web.urlhandler.version>1.0.1-SNAPSHOT</org.apache.aries.web.urlhandler.version>
-        <org.apache.felix.configadmin.version>1.2.4</org.apache.felix.configadmin.version>
-        <org.eclipse.osgi.version>3.11.3</org.eclipse.osgi.version>
-        <slf4j-api.version>1.7.7</slf4j-api.version>
-        <tinybundles.version>2.0.0</tinybundles.version>
+        <org.apache.felix.configadmin.version>1.9.26</org.apache.felix.configadmin.version>
+        <org.eclipse.osgi.version>3.17.0</org.eclipse.osgi.version>
+        <tinybundles.version>2.1.1</tinybundles.version>
         <url.version>2.5.3</url.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.eclipse.platform</groupId>
+            <artifactId>org.eclipse.osgi</artifactId>
+            <version>${org.eclipse.osgi.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.ow2.asm</groupId>
             <artifactId>asm-debug-all</artifactId>
@@ -76,10 +76,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.aries.blueprint</groupId>
-            <artifactId>org.apache.aries.blueprint.sample</artifactId>
-            <scope>test</scope>
-            <version>${org.apache.aries.blueprint.sample.version}</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.felix</groupId>
@@ -103,24 +102,17 @@
             <scope>test</scope>
             <version>${org.apache.aries.util.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.aries.proxy</groupId>
-            <artifactId>org.apache.aries.proxy</artifactId>
-            <scope>test</scope>
-            <version>${org.apache.aries.proxy.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.aries.blueprint</groupId>
-            <artifactId>org.apache.aries.blueprint</artifactId>
-            <scope>test</scope>
-            <version>${org.apache.aries.blueprint.version}</version>
-        </dependency>
 
         <!-- pax exam -->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j-api.version}</version>
+            <groupId>org.ops4j.pax.logging</groupId>
+            <artifactId>pax-logging-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.logging</groupId>
+            <artifactId>pax-logging-service</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.ops4j.pax.exam</groupId>
@@ -132,6 +124,12 @@
             <groupId>org.ops4j.pax.exam</groupId>
             <artifactId>pax-exam-container-native</artifactId>
             <version>${exam.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.tinybundles</groupId>
+            <artifactId>tinybundles</artifactId>
+            <version>${tinybundles.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -151,39 +149,6 @@
             <artifactId>pax-url-aether</artifactId>
             <version>${url.version}</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>${logback.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.ops4j.pax.tinybundles</groupId>
-            <artifactId>tinybundles</artifactId>
-            <version>${tinybundles.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>org.osgi.core</artifactId>
-                    <groupId>org.osgi</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.platform</groupId>
-            <artifactId>org.eclipse.osgi</artifactId>
-            <version>${org.eclipse.osgi.version}</version>
         </dependency>
 
         <dependency>
