@@ -387,6 +387,11 @@ public class ClientWeavingHookOSGi43Test  {
             EasyMock.replay(bw);
             return bw;
         }
+
+        @Override
+        public int getState() {
+            return TRANSFORMED;
+        }
     }
 
     private static class MyWovenClassClassLoader extends ClassLoader implements BundleReference {
