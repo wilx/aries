@@ -16,6 +16,7 @@ on:
   pull_request:
     paths:
       - parent/**
+      - testsupport/**
       - transaction/**
       - .github/workflows/transaction.yml
   push:
@@ -43,6 +44,12 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: ${{ matrix.java }}
+    - name: Build parent
+      shell: bash
+      run: mvn -U -e -B -ntp clean install -f parent
+    - name: Build testsupport
+      shell: bash
+      run: mvn -U -e -B -ntp clean install -f testsupport
     - name: Build transaction
       shell: bash
       run: mvn -U -e -B -ntp clean install -f transaction

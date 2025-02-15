@@ -18,17 +18,6 @@
  */
 package org.apache.aries.blueprint.itests;
 
-import static org.apache.aries.blueprint.itests.Helper.mvnBundle;
-import static org.junit.Assert.assertNotNull;
-import static org.ops4j.pax.exam.CoreOptions.composite;
-import static org.ops4j.pax.exam.CoreOptions.junitBundles;
-import static org.ops4j.pax.exam.CoreOptions.systemProperty;
-import static org.ops4j.pax.exam.CoreOptions.vmOption;
-import static org.ops4j.pax.exam.CoreOptions.when;
-
-import java.io.InputStream;
-import java.util.Hashtable;
-
 import org.apache.aries.itest.AbstractIntegrationTest;
 import org.apache.aries.itest.RichBundleContext;
 import org.junit.runner.RunWith;
@@ -44,6 +33,15 @@ import org.osgi.framework.BundleException;
 import org.osgi.service.blueprint.container.BlueprintContainer;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
+
+import java.io.InputStream;
+import java.util.Hashtable;
+
+import static org.apache.aries.blueprint.itests.Helper.mvnBundle;
+import static org.junit.Assert.assertNotNull;
+import static org.ops4j.pax.exam.CoreOptions.composite;
+import static org.ops4j.pax.exam.CoreOptions.junitBundles;
+import static org.ops4j.pax.exam.CoreOptions.systemProperty;
 
 /**
  * Base class for Pax Exam 1.2.x based unit tests Contains the injection point and various utilities used in
@@ -64,18 +62,14 @@ public abstract class AbstractBlueprintIntegrationTest extends AbstractIntegrati
     }
 
     public Option baseOptions() {
-        String localRepo = System.getProperty("maven.repo.local");
-        if (localRepo == null) {
-            localRepo = System.getProperty("org.ops4j.pax.url.mvn.localRepository");
-        }
-        return composite(junitBundles(),
-                         systemProperty("org.ops4j.pax.logging.DefaultServiceLog.level").value("INFO"),
-                         when(localRepo != null)
-                             .useOptions(vmOption("-Dorg.ops4j.pax.url.mvn.localRepository=" + localRepo)),
-                         mvnBundle("org.ops4j.pax.logging", "pax-logging-api"),
-                         mvnBundle("org.ops4j.pax.logging", "pax-logging-service"),
-                         systemProperty("pax.exam.osgi.unresolved.fail").value("true")
-            );
+        return composite(
+                junitBundles(),
+                setPaxExamLogLevel("INFO"),
+                mvnBundle("org.ops4j.pax.logging", "pax-logging-api"),
+                mvnBundle("org.ops4j.pax.logging", "pax-logging-service"),
+                configurePaxUrlLocalMavenRepoIfNeeded(),
+                systemProperty("pax.exam.osgi.unresolved.fail").value("true")
+        );
     }
 
     public InputStream getResource(String path) {

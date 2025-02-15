@@ -51,9 +51,6 @@ public class IntegrationTestBase {
     // the default bundle jar file name
     protected static final String BUNDLE_JAR_DEFAULT = "target/jmx-whiteboard.jar";
 
-    // the JVM option to set to enable remote debugging
-    protected static final String DEBUG_VM_OPTION = "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=30303";
-
     private static MBeanServer staticServer;
 
     private MBeanServer server;

@@ -15,14 +15,6 @@
  */
 package org.apache.aries.ejb.container.itest;
 
-import static org.ops4j.pax.exam.CoreOptions.composite;
-import static org.ops4j.pax.exam.CoreOptions.frameworkProperty;
-import static org.ops4j.pax.exam.CoreOptions.junitBundles;
-import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
-import static org.ops4j.pax.exam.CoreOptions.systemProperty;
-import static org.ops4j.pax.exam.CoreOptions.vmOption;
-import static org.ops4j.pax.exam.CoreOptions.when;
-
 import org.apache.aries.application.modelling.ModelledResourceManager;
 import org.apache.aries.application.modelling.ModellingManager;
 import org.apache.aries.application.modelling.ServiceModeller;
@@ -35,6 +27,11 @@ import org.ops4j.pax.exam.junit.PaxExam;
 import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerClass;
 import org.osgi.framework.BundleException;
+
+import static org.ops4j.pax.exam.CoreOptions.composite;
+import static org.ops4j.pax.exam.CoreOptions.frameworkProperty;
+import static org.ops4j.pax.exam.CoreOptions.junitBundles;
+import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerClass.class)
@@ -49,21 +46,14 @@ public class EJBModellingTest extends AbstractEJBModellerTest {
 	}
 
 	protected Option baseOptions() {
-		String localRepo = System.getProperty("maven.repo.local");
-
-		if (localRepo == null) {
-			localRepo = System.getProperty("org.ops4j.pax.url.mvn.localRepository");
-		}
-		return composite(
-				junitBundles(),
-				mavenBundle("org.ops4j.pax.logging", "pax-logging-api", "1.7.2"),
-				mavenBundle("org.ops4j.pax.logging", "pax-logging-service", "1.7.2"),
-				mavenBundle("org.apache.aries.testsupport", "org.apache.aries.testsupport.unit").versionAsInProject(),
-				// this is how you set the default log level when using pax
-				// logging (logProfile)
-				systemProperty("org.ops4j.pax.logging.DefaultServiceLog.level").value("INFO"),
-				when(localRepo != null).useOptions(vmOption("-Dorg.ops4j.pax.url.mvn.localRepository=" + localRepo))
-				);
+        return composite(
+                junitBundles(),
+                mavenBundle("org.apache.aries.testsupport", "org.apache.aries.testsupport.unit").versionAsInProject(),
+                addPaxLoggingBundles(),
+                setPaxExamLogLevel("INFO"),
+                configurePaxUrlLocalMavenRepoIfNeeded(),
+                setupRemoteDebugging()
+        );
 	}
 
 	@Configuration
@@ -98,20 +88,17 @@ public class EJBModellingTest extends AbstractEJBModellerTest {
 				mavenBundle("org.apache.geronimo.specs", "geronimo-jaxb_2.2_spec").versionAsInProject(),
 				mavenBundle("org.apache.geronimo.specs", "geronimo-stax-api_1.2_spec").versionAsInProject(),
 				mavenBundle("org.apache.geronimo.specs", "geronimo-jaxws_2.2_spec").versionAsInProject(),
-				
+
 				mavenBundle("commons-cli", "commons-cli").versionAsInProject(),
 				mavenBundle("org.apache.commons", "commons-lang3").versionAsInProject(),
 				mavenBundle("commons-lang", "commons-lang").versionAsInProject(),
 				mavenBundle("commons-beanutils", "commons-beanutils").versionAsInProject(),
 				mavenBundle("org.apache.servicemix.bundles", "org.apache.servicemix.bundles.commons-collections").versionAsInProject(),
-				
+
 				mavenBundle("org.apache.aries", "org.apache.aries.util").versionAsInProject(),
 				mavenBundle("org.apache.aries.proxy", "org.apache.aries.proxy").versionAsInProject(),
 				mavenBundle("org.apache.aries.blueprint", "org.apache.aries.blueprint").versionAsInProject(),
-				mavenBundle("org.ow2.asm", "asm").versionAsInProject(),
-				mavenBundle("org.ow2.asm", "asm-commons").versionAsInProject(),
-				mavenBundle("org.ow2.asm", "asm-tree").versionAsInProject(),
-				mavenBundle("org.ow2.asm", "asm-analysis").versionAsInProject(),
+				addAsmBundles(),
 
 				mavenBundle("org.apache.aries.application", "org.apache.aries.application.api").versionAsInProject(),
 				mavenBundle("org.apache.aries.application", "org.apache.aries.application.modeller").versionAsInProject(),
@@ -123,7 +110,7 @@ public class EJBModellingTest extends AbstractEJBModellerTest {
 				mavenBundle("org.apache.openejb", "openejb-javaagent").versionAsInProject(),
 				mavenBundle("org.apache.openejb", "openejb-jee").versionAsInProject(),
 				mavenBundle("org.apache.openejb", "openejb-loader").versionAsInProject(),
-				
+
 				mavenBundle("org.apache.openwebbeans", "openwebbeans-impl").versionAsInProject(),
 				mavenBundle("org.apache.openwebbeans", "openwebbeans-spi").versionAsInProject(),
 				mavenBundle("org.apache.openwebbeans", "openwebbeans-ee").versionAsInProject(),
@@ -133,8 +120,7 @@ public class EJBModellingTest extends AbstractEJBModellerTest {
 				mavenBundle("org.apache.servicemix.bundles", "org.apache.servicemix.bundles.javassist").versionAsInProject(),
 				mavenBundle("org.apache.servicemix.bundles", "org.apache.servicemix.bundles.wsdl4j-1.6.1").versionAsInProject(),
 				mavenBundle("org.apache.servicemix.bundles", "org.apache.servicemix.bundles.jaxb-impl").versionAsInProject(),
-				
-				
+
 				mavenBundle("org.apache.geronimo.components", "geronimo-connector").versionAsInProject(),
 				mavenBundle("org.apache.geronimo.components", "geronimo-transaction").versionAsInProject(),
 				mavenBundle("org.apache.geronimo.bundles", "scannotation").versionAsInProject(),
@@ -144,8 +130,6 @@ public class EJBModellingTest extends AbstractEJBModellerTest {
 				mavenBundle("org.apache.xbean", "xbean-reflect").versionAsInProject(),
 				mavenBundle("org.hsqldb", "hsqldb").versionAsInProject()
 				);
-		//        vmOption ("-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5006"),
-		//        waitForFrameworkStartup(),
 	}
 
 }
