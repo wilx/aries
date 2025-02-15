@@ -79,6 +79,7 @@ public abstract class AbstractIntegrationTest {
      * @throws BundleException
      */
     public void resolveBundles() throws BundleException {
+        System.out.println("Checking for bundles");
         Bundle[] bundles = bundleContext.getBundles();
         for (Bundle bundle : bundles) {
             if (bundle.getState() == Bundle.INSTALLED) {

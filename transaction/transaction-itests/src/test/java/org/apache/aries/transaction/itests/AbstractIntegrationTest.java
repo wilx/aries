@@ -45,16 +45,10 @@ import org.ops4j.pax.exam.junit.PaxExam;
 import org.ops4j.pax.exam.options.extra.CleanCachesOption;
 import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerClass;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.BundleException;
 
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerClass.class)
-public abstract class AbstractIntegrationTest {
-    @Inject
-    BundleContext bundleContext;
-    
+public abstract class AbstractIntegrationTest extends org.apache.aries.itest.AbstractIntegrationTest {
     @Inject
     UserTransaction tran;
     
@@ -64,19 +58,13 @@ public abstract class AbstractIntegrationTest {
     protected boolean clientTransaction = true;
 
     public Option baseOptions() {
-        String localRepo = System.getProperty("maven.repo.local");
-        if (localRepo == null) {
-            localRepo = System.getProperty("org.ops4j.pax.url.mvn.localRepository");
-        }
         return composite(
                 junitBundles(),
                 new CleanCachesOption(true), // change to 'false' if investigation is needed
-                // this is how you set the default log level when using pax
-                // logging (logProfile)
-                systemProperty("org.ops4j.pax.logging.DefaultServiceLog.level").value("INFO"),
-                // this option helps with debugging
-                //vmOption("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5006"),
-                when(localRepo != null).useOptions(vmOption("-Dorg.ops4j.pax.url.mvn.localRepository=" + localRepo))
+                addPaxLoggingBundles(),
+                setPaxExamLogLevel("INFO"),
+                configurePaxUrlLocalMavenRepoIfNeeded(),
+                setupRemoteDebugging()
          );
     }
 
@@ -90,8 +78,6 @@ public abstract class AbstractIntegrationTest {
                 systemProperty("pax.exam.osgi.unresolved.fail").value("true"),
 
                 // Bundles
-                mavenBundle("org.ops4j.pax.logging", "pax-logging-api").versionAsInProject(),
-                mavenBundle("org.ops4j.pax.logging", "pax-logging-service").versionAsInProject(),
                 mavenBundle("org.apache.felix", "org.apache.felix.configadmin").versionAsInProject(),
                 mavenBundle("org.apache.felix", "org.apache.felix.coordinator").versionAsInProject(),
                 
@@ -112,13 +98,8 @@ public abstract class AbstractIntegrationTest {
                 mavenBundle("org.apache.aries.transaction", "org.apache.aries.transaction.testbundle").versionAsInProject(),
                 mavenBundle("org.apache.aries.transaction", "org.apache.aries.transaction.testds").versionAsInProject(),
 
-                //debug(),
-                //new TimeoutOption( 0 ),
+                mavenBundle("org.apache.aries.testsupport", "org.apache.aries.testsupport.unit").versionAsInProject(),
         };
-    }
-
-    protected Option debug() {
-        return vmOption("-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005");
     }
 
     private Option jta12Bundles() {
@@ -131,23 +112,6 @@ public abstract class AbstractIntegrationTest {
             );
     }
     
-    /**
-     * Helps to diagnose bundles that are not resolved as it will throw a detailed exception
-     * 
-     * @throws BundleException
-     */
-    public void resolveBundles() throws BundleException {
-        System.out.println("Checking for bundles");
-        Bundle[] bundles = bundleContext.getBundles();
-        for (Bundle bundle : bundles) {
-            if (bundle.getState() == Bundle.INSTALLED) {
-                System.out.println("Found non resolved bundle " + bundle.getBundleId() + ":"
-                    + bundle.getSymbolicName() + ":" + bundle.getVersion());
-                bundle.start();
-            }
-        }
-    }
-
     // Test with client transaction and runtime exception - the user transaction is rolled back
     protected void assertInsertWithRuntimeExceptionRolledBack() throws Exception {
         TestBean bean = getBean();
