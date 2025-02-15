@@ -50,7 +50,7 @@ public class ParserServiceImportCmAndIncorrectNamespaceHandlersTest extends Abst
     public Option[] config() {
         return new Option[] {
                 baseOptions(),
-                systemProperty("org.ops4j.pax.logging.DefaultServiceLog.level").value("INFO"),
+                setPaxExamLogLevel("INFO"),
                 blueprintBundles(),
                 keepCaches(),
                 streamBundle(createIncorrectNamespaceHandlerBundle()),

@@ -75,10 +75,9 @@ public class ServiceStateMBeanTest extends AbstractIntegrationTest {
     @Configuration
     public Option[] configuration() {
 		return options(
-		        // new VMOption( "-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000" ),
-		        // new TimeoutOption( 0 ),
-				jmxRuntime(), 
-				bundlea(), 
+                setupRemoteDebugging(),
+                jmxRuntime(),
+				bundlea(),
 				bundleb()
 				);
     }

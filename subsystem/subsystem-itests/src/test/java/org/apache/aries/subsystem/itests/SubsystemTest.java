@@ -115,13 +115,12 @@ public abstract class SubsystemTest extends AbstractIntegrationTest {
 	}
 
 	public Option baseOptions() {
-        String localRepo = getLocalRepo();
         return composite(
                 junitBundles(),
-                // this is how you set the default log level when using pax
-                // logging (logProfile)
-                systemProperty("org.ops4j.pax.logging.DefaultServiceLog.level").value("INFO"),
-                when(localRepo != null).useOptions(vmOption("-Dorg.ops4j.pax.url.mvn.localRepository=" + localRepo))
+                addPaxLoggingBundles(),
+                setPaxExamLogLevel("INFO"),
+                configurePaxUrlLocalMavenRepoIfNeeded(),
+                setupRemoteDebugging()
          );
     }
 
@@ -151,13 +150,10 @@ public abstract class SubsystemTest extends AbstractIntegrationTest {
 				mavenBundle("org.eclipse.equinox",          "org.eclipse.equinox.region").version("1.1.0.v20120522-1841"),
 				mavenBundle("org.osgi",                     "org.osgi.enterprise").versionAsInProject(),
 				mavenBundle("org.easymock",					"easymock").versionAsInProject(),
-                mavenBundle("org.ops4j.pax.logging",        "pax-logging-api").versionAsInProject(),
-                mavenBundle("org.ops4j.pax.logging",        "pax-logging-service").versionAsInProject(),
                 mavenBundle("org.ops4j.pax.tinybundles",    "tinybundles").versionAsInProject(),
                 mavenBundle("biz.aQute.bnd",                "bndlib").versionAsInProject(),
                 mavenBundle("org.apache.aries.subsystem",	"org.apache.aries.subsystem.obr").versionAsInProject(),
-                mavenBundle("org.apache.felix",				"org.apache.felix.bundlerepository").versionAsInProject(),	
-//				org.ops4j.pax.exam.container.def.PaxRunnerOptions.vmOption("-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=7777"),
+                mavenBundle("org.apache.felix",				"org.apache.felix.bundlerepository").versionAsInProject(),
 		};
 	}
 

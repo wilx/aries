@@ -61,16 +61,10 @@ public abstract class AbstractIntegrationTest extends org.apache.aries.itest.Abs
     protected MBeanServer mbeanServer;
 
 	public Option baseOptions() {
-        String localRepo = System.getProperty("maven.repo.local");
-        if (localRepo == null) {
-            localRepo = System.getProperty("org.ops4j.pax.url.mvn.localRepository");
-        }
         return composite(
                 junitBundles(),
-                // this is how you set the default log level when using pax
-                // logging (logProfile)
-                systemProperty("org.ops4j.pax.logging.DefaultServiceLog.level").value("INFO"),
-                when(localRepo != null).useOptions(vmOption("-Dorg.ops4j.pax.url.mvn.localRepository=" + localRepo))
+                setPaxExamLogLevel("INFO"),
+                configurePaxUrlLocalMavenRepoIfNeeded()
          );
     }
 
@@ -84,8 +78,7 @@ public abstract class AbstractIntegrationTest extends org.apache.aries.itest.Abs
                 mavenBundle("org.apache.aries.jmx", "org.apache.aries.jmx.core.whiteboard").versionAsInProject(),
 				mavenBundle("org.apache.aries.jmx", "org.apache.aries.jmx.api").versionAsInProject(),
 				mavenBundle("org.apache.aries.jmx", "org.apache.aries.jmx.whiteboard").versionAsInProject(),
-				// TODO ARIES-2165 Bring back testsupport in maven
-				// mavenBundle("org.apache.aries.testsupport", "org.apache.aries.testsupport.unit").versionAsInProject(),
+				mavenBundle("org.apache.aries.testsupport", "org.apache.aries.testsupport.unit").versionAsInProject(),
 				mavenBundle("org.apache.aries.jmx", "org.apache.aries.jmx.mbeanserver-platform").versionAsInProject()
 				);
 	}

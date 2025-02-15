@@ -125,16 +125,11 @@ public class ConfigurationPostResolverTest extends AbstractIntegrationTest {
     }
     
     public Option baseOptions() {
-        String localRepo = System.getProperty("maven.repo.local");
-        if (localRepo == null) {
-            localRepo = System.getProperty("org.ops4j.pax.url.mvn.localRepository");
-        }
         return composite(
                 junitBundles(),
-                systemProperty("org.ops4j.pax.logging.DefaultServiceLog.level").value("INFO"),
-                when(localRepo != null).useOptions(vmOption("-Dorg.ops4j.pax.url.mvn.localRepository=" + localRepo)),
-                mavenBundle("org.ops4j.pax.logging", "pax-logging-api").versionAsInProject(),
-                mavenBundle("org.ops4j.pax.logging", "pax-logging-service").versionAsInProject()
+                setPaxExamLogLevel("INFO"),
+                addPaxLoggingBundles(),
+                configurePaxUrlLocalMavenRepoIfNeeded()
          );
     }
 

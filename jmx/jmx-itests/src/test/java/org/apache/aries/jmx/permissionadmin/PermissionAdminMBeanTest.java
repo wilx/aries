@@ -16,12 +16,6 @@
  */
 package org.apache.aries.jmx.permissionadmin;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.ops4j.pax.exam.CoreOptions.options;
-
-import java.io.IOException;
-
 import org.apache.aries.jmx.AbstractIntegrationTest;
 import org.junit.Test;
 import org.ops4j.pax.exam.Configuration;
@@ -30,6 +24,12 @@ import org.osgi.framework.Bundle;
 import org.osgi.jmx.service.permissionadmin.PermissionAdminMBean;
 import org.osgi.service.permissionadmin.PermissionAdmin;
 import org.osgi.service.permissionadmin.PermissionInfo;
+
+import java.io.IOException;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.ops4j.pax.exam.CoreOptions.options;
 
 /**
  *
@@ -41,11 +41,9 @@ public class PermissionAdminMBeanTest extends AbstractIntegrationTest {
     @Configuration
     public Option[] configuration() {
         return options(
-            jmxRuntime(),
-            bundlea()
-                    /* For debugging, uncomment the next two lines */
-//                     vmOption("-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=7778"),
-//                     waitForFrameworkStartup()
+                jmxRuntime(),
+                bundlea(),
+                setupRemoteDebugging()
         );
     }
 

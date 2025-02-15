@@ -103,19 +103,11 @@
             <artifactId>org.osgi.compendium</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!-- TODO ARIES-2165 restore dependency
         <dependency>
             <groupId>org.apache.aries.testsupport</groupId>
             <artifactId>org.apache.aries.testsupport.unit</artifactId>
             <version>${org.apache.aries.testsupport.unit.version}</version>
             <scope>test</scope>
-        </dependency>
-        -->
-        <!-- TODO ARIES-2165 remove testsupport transitive dependency -->
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>${javax.inject.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.aries.blueprint</groupId>

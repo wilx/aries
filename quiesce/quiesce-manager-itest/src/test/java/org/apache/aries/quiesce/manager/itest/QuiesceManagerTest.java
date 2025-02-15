@@ -278,13 +278,11 @@ public class QuiesceManagerTest extends AbstractIntegrationTest {
     }
 
     public Option baseOptions() {
-        String localRepo = getLocalRepo();
         return composite(
                 junitBundles(),
-                // this is how you set the default log level when using pax
-                // logging (logProfile)
-                systemProperty("org.ops4j.pax.logging.DefaultServiceLog.level").value("INFO"),
-                when(localRepo != null).useOptions(vmOption("-Dorg.ops4j.pax.url.mvn.localRepository=" + localRepo))
+                setPaxExamLogLevel("INFO"),
+                configurePaxUrlLocalMavenRepoIfNeeded(),
+                setupRemoteDebugging()
         );
     }
 
@@ -298,10 +296,6 @@ public class QuiesceManagerTest extends AbstractIntegrationTest {
                 mavenBundle("org.apache.aries.quiesce", "org.apache.aries.quiesce.api").versionAsInProject(),
                 mavenBundle("org.apache.aries.quiesce", "org.apache.aries.quiesce.manager").versionAsInProject(),
                 mavenBundle("org.apache.aries.testsupport", "org.apache.aries.testsupport.unit").versionAsInProject(),
-
-                //new VMOption( "-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000" ),
-                //new TimeoutOption( 0 ),
-
         };
     }
 }

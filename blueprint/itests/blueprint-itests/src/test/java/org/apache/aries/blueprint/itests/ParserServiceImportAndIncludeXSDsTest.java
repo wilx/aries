@@ -48,7 +48,7 @@ public class ParserServiceImportAndIncludeXSDsTest extends AbstractBlueprintInte
     public Option[] config() {
         return new Option[] {
                 baseOptions(),
-                systemProperty("org.ops4j.pax.logging.DefaultServiceLog.level").value("DEBUG"),
+                setPaxExamLogLevel("DEBUG"),
                 blueprintBundles(),
                 keepCaches(),
                 streamBundle(createAries1682NamespaceHandlerBundle()),
