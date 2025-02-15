@@ -368,14 +368,13 @@ public class IsolatedCfgAdminRuntimeTest extends AbstractIntegrationTest {
                 // framework / core bundles
                 mavenBundle("org.osgi", "org.osgi.core").versionAsInProject(),
                 mavenBundle("org.osgi", "org.osgi.compendium").versionAsInProject(),
-                mavenBundle("org.ops4j.pax.logging", "pax-logging-api").versionAsInProject(),
-                mavenBundle("org.ops4j.pax.logging", "pax-logging-service").versionAsInProject(),
 
                 // Repository
                 repository("http://repository.ops4j.org/maven2"),
 
                 // Logging
-                systemProperty("org.ops4j.pax.logging.DefaultServiceLog.level").value("INFO"),
+                addPaxLoggingBundles(),
+                setPaxExamLogLevel("INFO"),
 
                 // Bundles
                 junitBundles(),
