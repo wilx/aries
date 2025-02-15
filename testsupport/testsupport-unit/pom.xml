@@ -61,6 +61,7 @@
         </aries.osgi.import.pkg>
 
         <javax.inject.version>1</javax.inject.version>
+        <pax-exam.version>4.13.5</pax-exam.version>
     </properties>
 
     <dependencies>
@@ -81,6 +82,12 @@
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.compendium</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.exam</groupId>
+            <artifactId>pax-exam</artifactId>
+            <version>${pax-exam.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
