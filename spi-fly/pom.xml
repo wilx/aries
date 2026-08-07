@@ -30,7 +30,7 @@
 
     <groupId>org.apache.aries.spifly</groupId>
     <artifactId>spifly</artifactId>
-    <version>1.3.8-SNAPSHOT</version>
+    <version>1.3.8-bcm-SNAPSHOT</version>
     <name>Apache Aries SPI Fly</name>
     <packaging>pom</packaging>
     <description>

@@ -24,7 +24,7 @@
     <parent>
         <groupId>org.apache.aries.spifly</groupId>
         <artifactId>spifly</artifactId>
-        <version>1.3.8-SNAPSHOT</version>
+        <version>1.3.8-bcm-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
