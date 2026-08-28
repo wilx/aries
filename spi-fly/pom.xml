@@ -72,6 +72,8 @@
         <mockito.core.version>4.11.0</mockito.core.version>
         <org.apache.aries.versioning.plugin.version>0.3.1</org.apache.aries.versioning.plugin.version>
         <osgi.core.version>8.0.0</osgi.core.version>
+        <osgi.namespace.extender.version>1.0.1</osgi.namespace.extender.version>
+        <osgi.service.serviceloader.version>1.0.0</osgi.service.serviceloader.version>
         <osgi.test.version>1.3.0</osgi.test.version>
         <slf4j.version>2.0.18</slf4j.version>
     </properties>
@@ -93,6 +95,16 @@
                 <groupId>org.osgi</groupId>
                 <artifactId>osgi.core</artifactId>
                 <version>${osgi.core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.namespace.extender</artifactId>
+                <version>${osgi.namespace.extender.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.service.serviceloader</artifactId>
+                <version>${osgi.service.serviceloader.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>

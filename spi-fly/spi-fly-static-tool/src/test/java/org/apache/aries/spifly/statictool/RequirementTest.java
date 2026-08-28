@@ -40,6 +40,9 @@ import org.apache.aries.spifly.statictool.bundle.Test2Class;
 import org.apache.aries.spifly.statictool.bundle.Test3Class;
 import org.apache.aries.spifly.statictool.bundle.TestClass;
 import org.junit.Test;
+import org.osgi.framework.Constants;
+import org.osgi.namespace.extender.ExtenderNamespace;
+import org.osgi.service.serviceloader.ServiceLoaderNamespace;
 
 public class RequirementTest {
 	@Test
@@ -62,9 +65,13 @@ public class RequirementTest {
 			mainAttributes.putValue("Bundle-SymbolicName", "testbundle");
 			mainAttributes.putValue("Foo", "Bar Bar");
 			mainAttributes.putValue("Import-Package", "org.foo.bar");
-			mainAttributes.putValue(SpiFlyConstants.REQUIRE_CAPABILITY,
-					"osgi.serviceloader; filter:=\"(osgi.serviceloader=org.apache.aries.spifly.mysvc.SPIProvider)\";cardinality:=multiple, " +
-					"osgi.extender; filter:=\"(osgi.extender=osgi.serviceloader.processor)\"");
+			mainAttributes.putValue(Constants.REQUIRE_CAPABILITY,
+					ServiceLoaderNamespace.SERVICELOADER_NAMESPACE + "; filter:=\"("
+							+ ServiceLoaderNamespace.SERVICELOADER_NAMESPACE
+							+ "=org.apache.aries.spifly.mysvc.SPIProvider)\";cardinality:=multiple, " +
+					ExtenderNamespace.EXTENDER_NAMESPACE + "; filter:=\"("
+							+ ExtenderNamespace.EXTENDER_NAMESPACE
+							+ "=osgi.serviceloader.processor)\"");
 
 			JarOutputStream jos = new JarOutputStream(new FileOutputStream(jarFile), mf);
 			jos.putNextEntry(new ZipEntry(testClassFileName));
@@ -87,13 +94,17 @@ public class RequirementTest {
 			assertEquals("testbundle", actualMF.getMainAttributes().getValue("Bundle-SymbolicName"));
 			assertEquals("Bar Bar", actualMF.getMainAttributes().getValue("Foo"));
 			String requirement =
-					"osgi.serviceloader; filter:=\"(osgi.serviceloader=org.apache.aries.spifly.mysvc.SPIProvider)\";cardinality:=multiple, " +
-					"osgi.extender; filter:=\"(osgi.extender=osgi.serviceloader.processor)\"";
+					ServiceLoaderNamespace.SERVICELOADER_NAMESPACE + "; filter:=\"("
+							+ ServiceLoaderNamespace.SERVICELOADER_NAMESPACE
+							+ "=org.apache.aries.spifly.mysvc.SPIProvider)\";cardinality:=multiple, " +
+					ExtenderNamespace.EXTENDER_NAMESPACE + "; filter:=\"("
+							+ ExtenderNamespace.EXTENDER_NAMESPACE
+							+ "=osgi.serviceloader.processor)\"";
 			assertEquals(requirement,
-					actualMF.getMainAttributes().getValue(SpiFlyConstants.REQUIRE_CAPABILITY));
+					actualMF.getMainAttributes().getValue(Constants.REQUIRE_CAPABILITY));
 			assertEquals(requirement,
 					actualMF.getMainAttributes().getValue(
-							Main.PROCESSED_REQUIRE_CAPABILITY_HEADER));
+							SpiFlyConstants.PROCESSED_REQUIRE_CAPABILITY_HEADER));
 			assertNull("Should not generate this header when processing Require-Capability",
 					actualMF.getMainAttributes().getValue(SpiFlyConstants.PROCESSED_SPI_CONSUMER_HEADER));
 			String importPackage = actualMF.getMainAttributes().getValue("Import-Package");

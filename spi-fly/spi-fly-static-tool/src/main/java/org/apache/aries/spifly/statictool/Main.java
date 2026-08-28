@@ -47,8 +47,6 @@ import org.osgi.framework.Constants;
 import org.osgi.framework.Version;
 
 public class Main {
-    static final String PROCESSED_REQUIRE_CAPABILITY_HEADER =
-            "X-SpiFly-Processed-Require-Capability";
     private static final String MODIFIED_BUNDLE_SUFFIX = "_spifly.jar";
     private static final String IMPORT_PACKAGE = "Import-Package";
 
@@ -87,9 +85,9 @@ public class Main {
         if (consumerHeaderVal != null) {
             consumerHeaderKey = SpiFlyConstants.SPI_CONSUMER_HEADER;
         } else {
-            consumerHeaderVal = manifest.getMainAttributes().getValue(SpiFlyConstants.REQUIRE_CAPABILITY);
+            consumerHeaderVal = manifest.getMainAttributes().getValue(Constants.REQUIRE_CAPABILITY);
             if (consumerHeaderVal != null) {
-                consumerHeaderKey = SpiFlyConstants.REQUIRE_CAPABILITY;
+                consumerHeaderKey = Constants.REQUIRE_CAPABILITY;
             }
         }
 
@@ -101,11 +99,11 @@ public class Main {
                 manifest.getMainAttributes().remove(new Attributes.Name(SpiFlyConstants.SPI_CONSUMER_HEADER));
                 manifest.getMainAttributes().putValue(SpiFlyConstants.PROCESSED_SPI_CONSUMER_HEADER, consumerHeaderVal);
             } else {
-                // It's SpiFlyConstants.REQUIRE_CAPABILITY
+                // It's the Require-Capability header.
                 // Keep the processor requirement so the transformed consumer is resolved to the
                 // mediator that will enforce its provider wires at runtime.
                 manifest.getMainAttributes().putValue(
-                        PROCESSED_REQUIRE_CAPABILITY_HEADER, consumerHeaderVal);
+                        SpiFlyConstants.PROCESSED_REQUIRE_CAPABILITY_HEADER, consumerHeaderVal);
             }
 
             // TODO if new packages needed then...

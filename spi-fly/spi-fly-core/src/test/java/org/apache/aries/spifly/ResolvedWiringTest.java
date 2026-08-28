@@ -38,15 +38,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.Constants;
 import org.osgi.framework.wiring.BundleCapability;
 import org.osgi.framework.wiring.BundleRequirement;
 import org.osgi.framework.wiring.BundleWire;
 import org.osgi.framework.wiring.BundleWiring;
+import org.osgi.namespace.extender.ExtenderNamespace;
+import org.osgi.service.serviceloader.ServiceLoaderNamespace;
 
 public class ResolvedWiringTest {
     private static final String SERVICE_TYPE = "org.example.Service";
-    private static final String PROCESSED_REQUIRE_CAPABILITY_HEADER =
-            "X-SpiFly-Processed-Require-Capability";
 
     private final BaseActivator activator = new BaseActivator() {
         @Override
@@ -83,7 +84,7 @@ public class ResolvedWiringTest {
     public void ignoresProcessorWireToAnotherMediator() throws Exception {
         BundleWiring wiring = mockConsumerWiring(
                 Collections.singletonList(mockWire(
-                        SpiFlyConstants.EXTENDER_CAPABILITY_NAMESPACE,
+                        ExtenderNamespace.EXTENDER_NAMESPACE,
                         SpiFlyConstants.PROCESSOR_EXTENDER_NAME, mockBundle(99L))),
                 Collections.<BundleRequirement>emptyList(),
                 Collections.<BundleWire>emptyList());
@@ -101,11 +102,11 @@ public class ResolvedWiringTest {
         EasyMock.replay(serviceRequirement);
         BundleWiring wiring = mockConsumerWiring(
                 Collections.singletonList(mockWire(
-                        SpiFlyConstants.EXTENDER_CAPABILITY_NAMESPACE,
+                        ExtenderNamespace.EXTENDER_NAMESPACE,
                         SpiFlyConstants.PROCESSOR_EXTENDER_NAME, mediator)),
                 Collections.singletonList(serviceRequirement),
                 Collections.singletonList(mockWire(
-                        SpiFlyConstants.SERVICELOADER_CAPABILITY_NAMESPACE,
+                        ServiceLoaderNamespace.SERVICELOADER_NAMESPACE,
                         SERVICE_TYPE, selectedProvider)));
         Bundle consumer = mockConsumer(wiring);
 
@@ -123,7 +124,7 @@ public class ResolvedWiringTest {
         EasyMock.replay(serviceRequirement);
         BundleWiring wiring = mockConsumerWiring(
                 Collections.singletonList(mockWire(
-                        SpiFlyConstants.EXTENDER_CAPABILITY_NAMESPACE,
+                        ExtenderNamespace.EXTENDER_NAMESPACE,
                         SpiFlyConstants.PROCESSOR_EXTENDER_NAME, mediator)),
                 Collections.singletonList(serviceRequirement),
                 Collections.<BundleWire>emptyList());
@@ -139,7 +140,7 @@ public class ResolvedWiringTest {
     public void consumerWithoutServiceRequirementCanSeeAllPublishedProviders() throws Exception {
         BundleWiring wiring = mockConsumerWiring(
                 Collections.singletonList(mockWire(
-                        SpiFlyConstants.EXTENDER_CAPABILITY_NAMESPACE,
+                        ExtenderNamespace.EXTENDER_NAMESPACE,
                         SpiFlyConstants.PROCESSOR_EXTENDER_NAME, mediator)),
                 Collections.<BundleRequirement>emptyList(),
                 Collections.<BundleWire>emptyList());
@@ -155,7 +156,7 @@ public class ResolvedWiringTest {
     public void unrestrictedConsumerOnlySeesTypeSpaceCompatibleProviders() throws Exception {
         BundleWiring wiring = mockConsumerWiring(
                 Collections.singletonList(mockWire(
-                        SpiFlyConstants.EXTENDER_CAPABILITY_NAMESPACE,
+                        ExtenderNamespace.EXTENDER_NAMESPACE,
                         SpiFlyConstants.PROCESSOR_EXTENDER_NAME, mediator)),
                 Collections.<BundleRequirement>emptyList(),
                 Collections.<BundleWire>emptyList());
@@ -174,7 +175,7 @@ public class ResolvedWiringTest {
     public void staticallyWovenConsumerWiredToAnotherMediatorIsDenied() throws Exception {
         BundleWiring wiring = mockConsumerWiring(
                 Collections.singletonList(mockWire(
-                        SpiFlyConstants.EXTENDER_CAPABILITY_NAMESPACE,
+                        ExtenderNamespace.EXTENDER_NAMESPACE,
                         SpiFlyConstants.PROCESSOR_EXTENDER_NAME, mockBundle(99L))),
                 Collections.<BundleRequirement>emptyList(),
                 Collections.<BundleWire>emptyList());
@@ -197,7 +198,7 @@ public class ResolvedWiringTest {
                 Collections.<BundleWire>emptyList(),
                 Collections.singletonList(serviceRequirement),
                 Collections.singletonList(mockWire(
-                        SpiFlyConstants.SERVICELOADER_CAPABILITY_NAMESPACE,
+                        ServiceLoaderNamespace.SERVICELOADER_NAMESPACE,
                         SERVICE_TYPE, selectedProvider)));
         Bundle consumer = mockConsumer(wiring, true, false);
 
@@ -212,11 +213,11 @@ public class ResolvedWiringTest {
     private BundleWiring mockConsumerWiring(List<BundleWire> extenderWires,
             List<BundleRequirement> serviceRequirements, List<BundleWire> serviceWires) {
         BundleWiring wiring = EasyMock.createNiceMock(BundleWiring.class);
-        EasyMock.expect(wiring.getRequiredWires(SpiFlyConstants.EXTENDER_CAPABILITY_NAMESPACE))
+        EasyMock.expect(wiring.getRequiredWires(ExtenderNamespace.EXTENDER_NAMESPACE))
                 .andReturn(extenderWires).anyTimes();
-        EasyMock.expect(wiring.getRequirements(SpiFlyConstants.SERVICELOADER_CAPABILITY_NAMESPACE))
+        EasyMock.expect(wiring.getRequirements(ServiceLoaderNamespace.SERVICELOADER_NAMESPACE))
                 .andReturn(serviceRequirements).anyTimes();
-        EasyMock.expect(wiring.getRequiredWires(SpiFlyConstants.SERVICELOADER_CAPABILITY_NAMESPACE))
+        EasyMock.expect(wiring.getRequiredWires(ServiceLoaderNamespace.SERVICELOADER_NAMESPACE))
                 .andReturn(serviceWires).anyTimes();
         EasyMock.replay(wiring);
         return wiring;
@@ -246,15 +247,15 @@ public class ResolvedWiringTest {
 
     private Bundle mockConsumer(BundleWiring wiring, boolean processed, boolean processorRequirement) {
         Dictionary<String, String> headers = new Hashtable<String, String>();
-        String serviceRequirement = SpiFlyConstants.SERVICELOADER_CAPABILITY_NAMESPACE
-                + ";filter:=\"(" + SpiFlyConstants.SERVICELOADER_CAPABILITY_NAMESPACE
+        String serviceRequirement = ServiceLoaderNamespace.SERVICELOADER_NAMESPACE
+                + ";filter:=\"(" + ServiceLoaderNamespace.SERVICELOADER_NAMESPACE
                 + "=" + SERVICE_TYPE + ")\"";
-        headers.put(SpiFlyConstants.REQUIRE_CAPABILITY,
+        headers.put(Constants.REQUIRE_CAPABILITY,
                 processorRequirement
                         ? SpiFlyConstants.CLIENT_REQUIREMENT + "," + serviceRequirement
                         : serviceRequirement);
         if (processed) {
-            headers.put(PROCESSED_REQUIRE_CAPABILITY_HEADER,
+            headers.put(SpiFlyConstants.PROCESSED_REQUIRE_CAPABILITY_HEADER,
                     SpiFlyConstants.CLIENT_REQUIREMENT + "," + serviceRequirement);
         }
         Bundle consumer = EasyMock.createNiceMock(Bundle.class);

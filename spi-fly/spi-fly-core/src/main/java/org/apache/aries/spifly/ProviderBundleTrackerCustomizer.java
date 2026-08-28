@@ -50,10 +50,12 @@ import org.osgi.framework.BundleEvent;
 import org.osgi.framework.Constants;
 import org.osgi.framework.ServicePermission;
 import org.osgi.framework.ServiceRegistration;
+import org.osgi.framework.namespace.HostNamespace;
 import org.osgi.framework.wiring.BundleCapability;
 import org.osgi.framework.wiring.BundleRevision;
 import org.osgi.framework.wiring.BundleWire;
 import org.osgi.framework.wiring.BundleWiring;
+import org.osgi.service.serviceloader.ServiceLoaderNamespace;
 import org.osgi.util.tracker.BundleTrackerCustomizer;
 
 import aQute.bnd.header.Attrs;
@@ -96,12 +98,12 @@ public class ProviderBundleTrackerCustomizer implements BundleTrackerCustomizer 
         BundleWiring wiring = WiringUtils.getWiring(bundle);
         if (wiring != null) {
             List<BundleCapability> serviceLoaderCapabilities = wiring.getCapabilities(
-                    SpiFlyConstants.SERVICELOADER_CAPABILITY_NAMESPACE);
+                    ServiceLoaderNamespace.SERVICELOADER_NAMESPACE);
             if (!serviceLoaderCapabilities.isEmpty()) {
                 providedServices = new ArrayList<String>();
                 for (BundleCapability capability : serviceLoaderCapabilities) {
                     Object serviceType = capability.getAttributes().get(
-                            SpiFlyConstants.SERVICELOADER_CAPABILITY_NAMESPACE);
+                            ServiceLoaderNamespace.SERVICELOADER_NAMESPACE);
                     if (serviceType instanceof String) {
                         providedServices.add(((String) serviceType).trim());
                     }
@@ -350,7 +352,7 @@ public class ProviderBundleTrackerCustomizer implements BundleTrackerCustomizer 
         if (rev != null) {
             BundleWiring wiring = rev.getWiring();
             if (wiring != null) {
-                for (BundleWire wire : wiring.getProvidedWires("osgi.wiring.host")) {
+                for (BundleWire wire : wiring.getProvidedWires(HostNamespace.HOST_NAMESPACE)) {
                     Bundle fragment = wire.getRequirement().getRevision().getBundle();
                     Parameters fragmentParameters = new Parameters(fragment.getHeaders().get(headerName));
                     if (mergeHeader) {
@@ -388,7 +390,7 @@ public class ProviderBundleTrackerCustomizer implements BundleTrackerCustomizer 
     // null means don't register,
     // otherwise the return value should be taken as the service registration properties
     private Hashtable<String, Object> findServiceRegistrationProperties(Bundle bundle, String spiName, String implName) {
-        Object capabilityHeader = getHeaderFromBundleOrFragment(bundle, SpiFlyConstants.PROVIDE_CAPABILITY);
+        Object capabilityHeader = getHeaderFromBundleOrFragment(bundle, Constants.PROVIDE_CAPABILITY);
         if (capabilityHeader == null)
             return null;
 
@@ -398,11 +400,11 @@ public class ProviderBundleTrackerCustomizer implements BundleTrackerCustomizer 
             String key = ConsumerHeaderProcessor.removeDuplicateMarker(entry.getKey());
             Attrs attrs = entry.getValue();
 
-            if (!SpiFlyConstants.SERVICELOADER_CAPABILITY_NAMESPACE.equals(key))
+            if (!ServiceLoaderNamespace.SERVICELOADER_NAMESPACE.equals(key))
                 continue;
 
-            if (!attrs.containsKey(SpiFlyConstants.SERVICELOADER_CAPABILITY_NAMESPACE) ||
-                    !attrs.get(SpiFlyConstants.SERVICELOADER_CAPABILITY_NAMESPACE).equals(spiName))
+            if (!attrs.containsKey(ServiceLoaderNamespace.SERVICELOADER_NAMESPACE) ||
+                    !attrs.get(ServiceLoaderNamespace.SERVICELOADER_NAMESPACE).equals(spiName))
                 continue;
 
             if (attrs.containsKey(SpiFlyConstants.REGISTER_DIRECTIVE) &&
@@ -411,7 +413,7 @@ public class ProviderBundleTrackerCustomizer implements BundleTrackerCustomizer 
 
             Hashtable<String, Object> properties = new Hashtable<String, Object>();
             for (Map.Entry<String, String> prop : attrs.entrySet()) {
-                if (SpiFlyConstants.SERVICELOADER_CAPABILITY_NAMESPACE.equals(prop.getKey()) ||
+                if (ServiceLoaderNamespace.SERVICELOADER_NAMESPACE.equals(prop.getKey()) ||
                         SpiFlyConstants.REGISTER_DIRECTIVE.equals(prop.getKey()) ||
                         key.startsWith("."))
                     continue;

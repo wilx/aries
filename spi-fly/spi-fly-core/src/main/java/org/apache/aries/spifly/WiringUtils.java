@@ -22,6 +22,7 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.wiring.BundleRevision;
 import org.osgi.framework.wiring.BundleWire;
 import org.osgi.framework.wiring.BundleWiring;
+import org.osgi.namespace.extender.ExtenderNamespace;
 
 final class WiringUtils {
     private WiringUtils() {
@@ -42,9 +43,9 @@ final class WiringUtils {
             return false;
         }
 
-        for (BundleWire wire : wiring.getRequiredWires(SpiFlyConstants.EXTENDER_CAPABILITY_NAMESPACE)) {
+        for (BundleWire wire : wiring.getRequiredWires(ExtenderNamespace.EXTENDER_NAMESPACE)) {
             Object name = wire.getCapability().getAttributes().get(
-                    SpiFlyConstants.EXTENDER_CAPABILITY_NAMESPACE);
+                    ExtenderNamespace.EXTENDER_NAMESPACE);
             BundleWiring providerWiring = wire.getProviderWiring();
             if (extenderName.equals(name) && providerWiring != null
                     && providerWiring.getBundle() != null

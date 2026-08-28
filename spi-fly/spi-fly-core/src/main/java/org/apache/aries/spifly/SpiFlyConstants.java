@@ -19,6 +19,7 @@
 package org.apache.aries.spifly;
 
 import org.osgi.framework.Version;
+import org.osgi.namespace.extender.ExtenderNamespace;
 
 public interface SpiFlyConstants {
     String SPECIFICATION_VERSION_STRING = "1.0.0";
@@ -48,10 +49,11 @@ public interface SpiFlyConstants {
     String REGISTRAR_EXTENDER_NAME = "osgi.serviceloader.registrar";
 
     // Pre-baked requirements for consumer and provider
-    String CLIENT_REQUIREMENT = EXTENDER_CAPABILITY_NAMESPACE + "; " + FILTER_DIRECTIVE +
-            "=\"(" + EXTENDER_CAPABILITY_NAMESPACE + "=" + PROCESSOR_EXTENDER_NAME + ")\"";
-    String PROVIDER_REQUIREMENT = EXTENDER_CAPABILITY_NAMESPACE + "; " + FILTER_DIRECTIVE +
-            "=\"(" + EXTENDER_CAPABILITY_NAMESPACE + "=" + REGISTRAR_EXTENDER_NAME + ")\"";
+    String CLIENT_REQUIREMENT = ExtenderNamespace.EXTENDER_NAMESPACE + "; " + FILTER_DIRECTIVE +
+            "=\"(" + ExtenderNamespace.EXTENDER_NAMESPACE + "=" + PROCESSOR_EXTENDER_NAME + ")\"";
+    String PROVIDER_REQUIREMENT = ExtenderNamespace.EXTENDER_NAMESPACE + "; " + FILTER_DIRECTIVE +
+            "=\"(" + ExtenderNamespace.EXTENDER_NAMESPACE + "=" + REGISTRAR_EXTENDER_NAME + ")\"";
 
     String PROCESSED_SPI_CONSUMER_HEADER = "X-SpiFly-Processed-SPI-Consumer";
+    String PROCESSED_REQUIRE_CAPABILITY_HEADER = "X-SpiFly-Processed-Require-Capability";
 }

@@ -31,10 +31,13 @@ import java.util.ServiceLoader;
 import java.util.Set;
 
 import org.apache.aries.spifly.HeaderParser.PathElement;
+import org.osgi.framework.Constants;
 import org.osgi.framework.Filter;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.Version;
+import org.osgi.namespace.extender.ExtenderNamespace;
+import org.osgi.service.serviceloader.ServiceLoaderNamespace;
 
 import aQute.bnd.header.OSGiHeader;
 import aQute.bnd.header.Parameters;
@@ -44,7 +47,7 @@ public class ConsumerHeaderProcessor {
 
     static {
         PROCESSOR_FILTER_MATCH = new Hashtable<String, String>();
-        PROCESSOR_FILTER_MATCH.put(SpiFlyConstants.EXTENDER_CAPABILITY_NAMESPACE, SpiFlyConstants.PROCESSOR_EXTENDER_NAME);
+        PROCESSOR_FILTER_MATCH.put(ExtenderNamespace.EXTENDER_NAMESPACE, SpiFlyConstants.PROCESSOR_EXTENDER_NAME);
     }
 
     /**
@@ -77,7 +80,7 @@ public class ConsumerHeaderProcessor {
      * @throws Exception when a header cannot be parsed.
      */
     public static Set<WeavingData> processHeader(String consumerHeaderName, String consumerHeader) throws Exception {
-        if (SpiFlyConstants.REQUIRE_CAPABILITY.equals(consumerHeaderName)) {
+        if (Constants.REQUIRE_CAPABILITY.equals(consumerHeaderName)) {
             return processRequireCapabilityHeader(consumerHeader);
         }
 
@@ -195,8 +198,8 @@ public class ConsumerHeaderProcessor {
         Set<WeavingData> weavingData = new HashSet<WeavingData>();
 
         Parameters requirements = OSGiHeader.parseHeader(consumerHeader);
-        Entry<String, ? extends Map<String, String>> extenderRequirement = findRequirement(requirements, SpiFlyConstants.EXTENDER_CAPABILITY_NAMESPACE, SpiFlyConstants.PROCESSOR_EXTENDER_NAME);
-        Collection<Entry<String, ? extends Map<String, String>>> serviceLoaderRequirements = findAllMetadata(requirements, SpiFlyConstants.SERVICELOADER_CAPABILITY_NAMESPACE);
+        Entry<String, ? extends Map<String, String>> extenderRequirement = findRequirement(requirements, ExtenderNamespace.EXTENDER_NAMESPACE, SpiFlyConstants.PROCESSOR_EXTENDER_NAME);
+        Collection<Entry<String, ? extends Map<String, String>>> serviceLoaderRequirements = findAllMetadata(requirements, ServiceLoaderNamespace.SERVICELOADER_NAMESPACE);
 
         if (extenderRequirement != null) {
             List<BundleDescriptor> allowedBundles = new ArrayList<BundleDescriptor>();
@@ -253,7 +256,7 @@ public class ConsumerHeaderProcessor {
         String[] argClasses = restriction.getMethodRestriction(methodName).getArgClasses();
 
         return new WeavingData(className, methodName, argClasses, restrictions,
-                allowedBundles.size() == 0 ? null : allowedBundles);
+                allowedBundles.isEmpty() ? null : allowedBundles);
     }
 
     static Entry<String, ? extends Map<String, String>> findCapability(Parameters capabilities, String namespace, String spiName) {

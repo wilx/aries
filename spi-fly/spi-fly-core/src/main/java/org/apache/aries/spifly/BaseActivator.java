@@ -42,10 +42,13 @@ import java.util.logging.Logger;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.Constants;
+import org.osgi.framework.namespace.HostNamespace;
 import org.osgi.framework.wiring.BundleRequirement;
 import org.osgi.framework.wiring.BundleRevision;
 import org.osgi.framework.wiring.BundleWire;
 import org.osgi.framework.wiring.BundleWiring;
+import org.osgi.service.serviceloader.ServiceLoaderNamespace;
 import org.osgi.util.tracker.BundleTracker;
 
 import aQute.bnd.header.Parameters;
@@ -53,8 +56,6 @@ import aQute.bnd.stream.MapStream;
 import aQute.libg.glob.Glob;
 
 public abstract class BaseActivator implements BundleActivator {
-    private static final String PROCESSED_REQUIRE_CAPABILITY_HEADER =
-            "X-SpiFly-Processed-Require-Capability";
     private static final Set<WeavingData> NON_WOVEN_BUNDLE = Collections.emptySet();
     private static final Logger logger = Logger.getLogger(BaseActivator.class.getName());
 
@@ -123,13 +124,13 @@ public abstract class BaseActivator implements BundleActivator {
 
         Bundle mediatorBundle = bundleContext == null ? null : bundleContext.getBundle();
         List<String> proprietaryHeaders = getAllHeaders(consumerHeaderName, bundle);
-        boolean directRequirementCompatibility = SpiFlyConstants.REQUIRE_CAPABILITY.equals(consumerHeaderName);
+        boolean directRequirementCompatibility = Constants.REQUIRE_CAPABILITY.equals(consumerHeaderName);
         boolean standardCandidate = proprietaryHeaders.isEmpty() && !directRequirementCompatibility;
         BundleWiring wiring = mediatorBundle == null || !standardCandidate
                 ? null : WiringUtils.getWiring(bundle);
         boolean staticMediator = SpiFlyConstants.PROCESSED_SPI_CONSUMER_HEADER.equals(consumerHeaderName);
         boolean processedStandardBundle = !staticMediator
-                || !getAllHeaders(PROCESSED_REQUIRE_CAPABILITY_HEADER, bundle).isEmpty();
+                || !getAllHeaders(SpiFlyConstants.PROCESSED_REQUIRE_CAPABILITY_HEADER, bundle).isEmpty();
 
         if (mediatorBundle != null && processedStandardBundle
                 && WiringUtils.isWiredToExtender(
@@ -142,8 +143,8 @@ public abstract class BaseActivator implements BundleActivator {
         // working as an explicitly separate compatibility path, but use their remaining resolved
         // ServiceLoader wires instead of reapplying the saved requirement filters.
         boolean legacyStaticBundle = staticMediator
-                && !getAllHeaders(PROCESSED_REQUIRE_CAPABILITY_HEADER, bundle).isEmpty()
-                && getAllHeaders(SpiFlyConstants.REQUIRE_CAPABILITY, bundle).stream()
+                && !getAllHeaders(SpiFlyConstants.PROCESSED_REQUIRE_CAPABILITY_HEADER, bundle).isEmpty()
+                && getAllHeaders(Constants.REQUIRE_CAPABILITY, bundle).stream()
                         .noneMatch(header -> header.contains(SpiFlyConstants.PROCESSOR_EXTENDER_NAME));
         if (legacyStaticBundle) {
             registerStandardConsumer(bundle, wiring);
@@ -166,7 +167,7 @@ public abstract class BaseActivator implements BundleActivator {
                 i -> Glob.toPattern(i).asPredicate().test(bundle.getSymbolicName())
             ).findFirst().ifPresent(
                 un -> allHeaders.put(
-                    SpiFlyConstants.REQUIRE_CAPABILITY,
+                    Constants.REQUIRE_CAPABILITY,
                     Arrays.asList(
                         SpiFlyConstants.CLIENT_REQUIREMENT.concat(",osgi.serviceloader;filter:='(osgi.serviceloader=*)'")))
             );
@@ -205,7 +206,7 @@ public abstract class BaseActivator implements BundleActivator {
         if (rev != null) {
             BundleWiring wiring = rev.getWiring();
             if (wiring != null) {
-                for (BundleWire wire : wiring.getProvidedWires("osgi.wiring.host")) {
+                for (BundleWire wire : wiring.getProvidedWires(HostNamespace.HOST_NAMESPACE)) {
                     bundlesFragments.add(wire.getRequirement().getRevision().getBundle());
                 }
             }
@@ -447,7 +448,7 @@ public abstract class BaseActivator implements BundleActivator {
                         "load".equals(methodName)) {
                         String type = args.get(new Pair<Integer, String>(0, Class.class.getName()));
                         if (type != null) {
-                            d.put(SpiFlyConstants.SERVICELOADER_CAPABILITY_NAMESPACE, type);
+                            d.put(ServiceLoaderNamespace.SERVICELOADER_NAMESPACE, type);
                             d.putAll(getCustomBundleAttributes(type, b));
                         }
                     }
@@ -480,16 +481,16 @@ public abstract class BaseActivator implements BundleActivator {
             }
 
             List<BundleRequirement> requirements = wiring.getRequirements(
-                    SpiFlyConstants.SERVICELOADER_CAPABILITY_NAMESPACE);
+                    ServiceLoaderNamespace.SERVICELOADER_NAMESPACE);
             if (requirements.isEmpty()) {
                 return new StandardConsumerWiring(false, Collections.<String, Set<Bundle>>emptyMap());
             }
 
             Map<String, Set<Bundle>> providers = new HashMap<String, Set<Bundle>>();
             for (BundleWire wire : wiring.getRequiredWires(
-                    SpiFlyConstants.SERVICELOADER_CAPABILITY_NAMESPACE)) {
+                    ServiceLoaderNamespace.SERVICELOADER_NAMESPACE)) {
                 Object serviceType = wire.getCapability().getAttributes().get(
-                        SpiFlyConstants.SERVICELOADER_CAPABILITY_NAMESPACE);
+                        ServiceLoaderNamespace.SERVICELOADER_NAMESPACE);
                 BundleWiring providerWiring = wire.getProviderWiring();
                 if (serviceType instanceof String && providerWiring != null) {
                     providers.computeIfAbsent((String) serviceType, key -> new HashSet<Bundle>())
